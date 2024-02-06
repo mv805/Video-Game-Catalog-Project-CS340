@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS Customers (
 DROP TABLE IF EXISTS Orders;
 CREATE TABLE IF NOT EXISTS Orders (
     orderID INT NOT NULL AUTO_INCREMENT,
-    date DATE NOT NULL,
+    date DATETIME NOT NULL,
     customerID INT NULL,
     PRIMARY KEY (orderID),
     -- From the application, the customers will only be able to be deleted if its not associated with an order, but if its not then it can be deleted. The entire order should not be deleted if a customer is deleted administratively, so the entry will just be set to null in that case.
