@@ -264,6 +264,20 @@ VALUES (
         'nicktoons@yahoo.com',
         12
     );
+    INSERT INTO Customers (
+        customerID,
+        firstName,
+        lastName,
+        email,
+        rewardPoints
+    )
+VALUES (
+        3,
+        'Patrick',
+        'Bateman',
+        'pbateman@pp.com',
+        17
+    );
 COMMIT;
 -- -----------------------------------------------------
 -- Data for table Orders
