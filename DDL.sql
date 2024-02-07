@@ -135,238 +135,138 @@ CREATE TABLE IF NOT EXISTS GameHasGenres (
 -- Data for table Developers
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Developers (developerID, name)
-VALUES (1, 'Activision Blizzard');
-INSERT INTO Developers (developerID, name)
-VALUES (2, 'Epic Games');
-INSERT INTO Developers (developerID, name)
-VALUES (3, 'Electronic Arts');
-INSERT INTO Developers (developerID, name)
-VALUES (4, 'Rockstar Games');
-INSERT INTO Developers (developerID, name)
-VALUES (5, 'Nintendo');
-INSERT INTO Developers (developerID, name)
-VALUES (6, 'DMA Design');
-INSERT INTO Developers (developerID, name)
-VALUES (7, 'ConcernedApe');
+INSERT INTO Developers (developerID, name) VALUES 
+(1, 'Activision Blizzard'),
+(2, 'Epic Games'),
+(3, 'Electronic Arts'),
+(4, 'Rockstar Games'),
+(5, 'Nintendo'),
+(6, 'DMA Design'),
+(7, 'ConcernedApe');
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table Franchises
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Franchises (franchiseID, title)
-VALUES (1, 'Halo');
-INSERT INTO Franchises (franchiseID, title)
-VALUES (2, 'Zelda');
-INSERT INTO Franchises (franchiseID, title)
-VALUES (3, 'Grand Theft Auto');
-INSERT INTO Franchises (franchiseID, title)
-VALUES (4, 'Mario');
-INSERT INTO Franchises (franchiseID, title)
-VALUES (5, 'Pokemon');
+INSERT INTO Franchises (franchiseID, title) VALUES 
+(1, 'Halo'),
+(2, 'Zelda'),
+(3, 'Grand Theft Auto'),
+(4, 'Mario'),
+(5, 'Pokemon');
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table Games
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Games (
-        gameID,
-        title,
-        releaseYear,
-        price,
-        developerID,
-        franchiseID
-    )
-VALUES (1, 'Super Mario World', '1990', 10.00, 5, 4);
-INSERT INTO Games (
-        gameID,
-        title,
-        releaseYear,
-        price,
-        developerID,
-        franchiseID
-    )
-VALUES (2, 'Grand Theft Auto', '1997', 10.00, 6, 3);
-INSERT INTO Games (
-        gameID,
-        title,
-        releaseYear,
-        price,
-        developerID,
-        franchiseID
-    )
-VALUES (3, 'Stardew Valley', '2016', 39.99, 7, NULL);
-INSERT INTO Games (
-        gameID,
-        title,
-        releaseYear,
-        price,
-        developerID,
-        franchiseID
-    )
-VALUES (4, 'Tennis For Two', '1958', 500.00, NULL, NULL);
-INSERT INTO Games (
-        gameID,
-        title,
-        releaseYear,
-        price,
-        developerID,
-        franchiseID
-    )
-VALUES (5, 'Super Mario RPG', '2023', 59.99, 5, 4);
+INSERT INTO Games (gameID, title, releaseYear, price, developerID, franchiseID) VALUES 
+(1, 'Super Mario World', '1990', 10.00, 5, 4),
+(2, 'Grand Theft Auto', '1997', 10.00, 6, 3),
+(3, 'Stardew Valley', '2016', 39.99, 7, NULL),
+(4, 'Tennis For Two', '1958', 500.00, NULL, NULL),
+(5, 'Super Mario RPG', '2023', 59.99, 5, 4);
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table Genres
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Genres (genreID, name)
-VALUES (1, 'Roleplaying');
-INSERT INTO Genres (genreID, name)
-VALUES (2, 'First Person Shooter');
-INSERT INTO Genres (genreID, name)
-VALUES (3, 'Platformer');
-INSERT INTO Genres (genreID, name)
-VALUES (4, 'Action');
-INSERT INTO Genres (genreID, name)
-VALUES (5, 'Fighting');
-INSERT INTO Genres (genreID, name)
-VALUES (6, 'Survival');
-INSERT INTO Genres (genreID, name)
-VALUES (7, 'Crafting');
-INSERT INTO Genres (genreID, name)
-VALUES (8, 'Sports');
-INSERT INTO Genres (genreID, name)
-VALUES (9, 'Farming');
+INSERT INTO Genres (genreID, name) VALUES 
+(1, 'Roleplaying'),
+(2, 'First Person Shooter'),
+(3, 'Platformer'),
+(4, 'Action'),
+(5, 'Fighting'),
+(6, 'Survival'),
+(7, 'Crafting'),
+(8, 'Sports'),
+(9, 'Farming');
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table Customers
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Customers (
-        customerID,
-        firstName,
-        lastName,
-        email,
-        rewardPoints
-    )
-VALUES (1, 'Jackie', 'Harell', 'jh@amazon.com', 58);
-INSERT INTO Customers (
-        customerID,
-        firstName,
-        lastName,
-        email,
-        rewardPoints
-    )
-VALUES (
-        2,
-        'Nigel',
-        'Thornberry',
-        'nicktoons@yahoo.com',
-        12
-    );
+INSERT INTO Customers (customerID, firstName, lastName, email, rewardPoints) VALUES 
+(1, 'Jackie', 'Harell', 'jh@amazon.com', 58),
+(2, 'Nigel', 'Thornberry', 'nicktoons@yahoo.com', 12),
+(3, 'Patrick', 'Bateman', 'pbateman@pp.com', 17);
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table Orders
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Orders (orderID, date, customerID)
-VALUES (1, '2021-10-01', 1);
-INSERT INTO Orders (orderID, date, customerID)
-VALUES (2, '2021-09-11', NULL);
-INSERT INTO Orders (orderID, date, customerID)
-VALUES (3, '2021-08-21', NULL);
-INSERT INTO Orders (orderID, date, customerID)
-VALUES (4, '2022-01-13', NULL);
-INSERT INTO Orders (orderID, date, customerID)
-VALUES (5, '2022-01-25', NULL);
-INSERT INTO Orders (orderID, date, customerID)
-VALUES (6, '2022-06-05', NULL);
-INSERT INTO Orders (orderID, date, customerID)
-VALUES (7, '2022-07-14', 2);
+INSERT INTO Orders (orderID, date, customerID) VALUES 
+(1, '2021-10-01', 1),
+(2, '2021-09-11', NULL),
+(3, '2021-08-21', NULL),
+(4, '2022-01-13', NULL),
+(5, '2022-01-25', NULL),
+(6, '2022-06-05', NULL),
+(7, '2022-07-14', 2);
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table Platforms
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Platforms (platformID, name)
-VALUES (1, 'PC');
-INSERT INTO Platforms (platformID, name)
-VALUES (2, 'Oscilloscope');
-INSERT INTO Platforms (platformID, name)
-VALUES (3, 'Super Nintendo');
-INSERT INTO Platforms (platformID, name)
-VALUES (4, 'Nintendo Switch');
-INSERT INTO Platforms (platformID, name)
-VALUES (5, 'Playstation 5');
-INSERT INTO Platforms (platformID, name)
-VALUES (6, 'Xbox 360');
-INSERT INTO Platforms (platformID, name)
-VALUES (7, 'Xbox Series X');
+INSERT INTO Platforms (platformID, name) VALUES 
+(1, 'PC'),
+(2, 'Oscilloscope'),
+(3, 'Super Nintendo'),
+(4, 'Nintendo Switch'),
+(5, 'Playstation 5'),
+(6, 'Xbox 360'),
+(7, 'Xbox Series X');
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table OrderHasGames
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (1, 1, 1);
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (2, 2, 1);
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (3, 4, 2);
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (4, 1, 3);
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (5, 2, 4);
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (6, 3, 4);
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (7, 4, 4);
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID)
-VALUES (8, 4, 4);
+INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID) VALUES 
+(1, 1, 1),
+(2, 2, 1),
+(3, 4, 2),
+(4, 1, 3),
+(5, 2, 4),
+(6, 3, 4),
+(7, 4, 4),
+(8, 4, 4);
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table PlatformHasGames
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (1, 4, 2);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (2, 3, 1);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (3, 3, 4);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (4, 3, 7);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (5, 3, 5);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (6, 1, 3);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (7, 1, 4);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (8, 2, 1);
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID)
-VALUES (9, 5, 4);
+INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID) VALUES 
+(1, 4, 2),
+(2, 3, 1),
+(3, 3, 4),
+(4, 3, 7),
+(5, 3, 5),
+(6, 1, 3),
+(7, 1, 4),
+(8, 2, 1),
+(9, 5, 4);
 COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table GameHasGenres
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (1, 1, 3);
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (2, 1, 4);
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (3, 2, 4);
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (4, 3, 7);
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (5, 3, 9);
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (6, 4, 8);
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (7, 5, 1);
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID)
-VALUES (8, 5, 4);
+INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID) VALUES 
+(1, 1, 3),
+(2, 1, 4),
+(3, 2, 4),
+(4, 3, 7),
+(5, 3, 9),
+(6, 4, 8),
+(7, 5, 1),
+(8, 5, 4);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
