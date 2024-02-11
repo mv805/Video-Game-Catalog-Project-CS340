@@ -1,34 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Team 22</title>
-<style>
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Team 22</title>
+  <style>
+    table, th, td, form {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <h1><strong>Game Quest: Video Game Store</strong></h1>
-</header>
-<!-- Links to pages -->
-<nav class="global-nav">
-    <a href="genre.html">Genres</a> | 
-    <a href="platform.html">Platforms</a> | 
-    <a href="orders.html">Orders</a> | 
+  <header>
+    <h1><strong>Game Quest: Video Game Store</strong></h1>
+  </header>
+  <!-- Links to pages -->
+  <nav class="global-nav">
+    <a href="index.html">Inventory</a> |
+    <a href="genre.html">Genres</a> |
+    <a href="platform.html">Platforms</a> |
+    <a href="orders.html">Orders</a> |
     <a href="customers.html">Customers</a> |
     <a href="franchise.html">Franchises</a> |
     <a href="developer.html">Developers</a>
   </nav>
-<p>&nbsp;</p>
-<h2>Genres:</h2>
-<script>
-// add script
-</script>
+  <p>&nbsp;</p>
+  <h2>Genres Page</h2>
 
+  <p>&nbsp;</p>
+  <h3>Games:</h3>
+  <table id="gamesList">
+    <tr>
+      <th>Game ID</th>
+      <th>Title</th>
+      <th>Release Year</th>
+      <th>Price</th>
+      <th>Developer</th>
+      <th>Franchise</th>
+    </tr>
+    <!-- entries will be dynamically inserted here -->
+  </table>
+
+  <p>&nbsp;</p>
+  <h3>Genres:</h3>
+  <table id="genresList">
+    <tr>
+      <th>genreID</th>
+      <th>name</th>
+    </tr>
+    <!-- entries will be dynamically inserted here -->
+  </table>
+
+  <p>&nbsp;</p>
+  <h3>Game-Genre Relation:</h3>
+  <table id="gameHasGenresList">
+    <tr>
+      <th>gameHasGenresID</th>
+      <th>gameID</th>
+      <th>genreID</th>
+    </tr>
+    <!-- entries will be dynamically inserted here -->
+  </table>
+
+
+
+
+
+
+  <!-- Questions:
+  1) do we add IDs or let incrementally increase with JavaScript
+  2) Modify plurality for consistency 
+  3) do we allow IDs for CRUD operations-->
+
+
+
+
+
+
+  <!-- Input Text Box to Insert -->
+  <p>&nbsp;</p>
+  <h3>Add New Game</h3>
+  <form id="addGameForm">
+    <input type="text" id="gameTitle" placeholder="Title" required>
+    <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
+    <input type="text" id="gamePrice" placeholder="Price" required>
+    <input type="text" id="gameDeveloper" placeholder="Developer ID" required>
+    <input type="text" id="gameFranchise" placeholder="Franchise ID" required>
+    <button type="submit">Add Game</button>
+  </form>
+
+  <!-- Input Text Box to Insert -->
+  <p>&nbsp;</p>
+  <h3>Add New Genre</h3>
+  <form id="addGenreForm">
+    <input type="text" id="genreName" placeholder="Genre Name" required>
+    <button type="submit">Add Genre</button>
+  </form>
+
+  <!-- Input Text Box to Insert -->
+  <p>&nbsp;</p>
+  <h3>Add New Game-Genre Relation</h3>
+  <form id="addGameGenreForm">
+    <input type="text" id="associationGameID" placeholder="Game ID" required>
+    <input type="text" id="associationGenreID" placeholder="Genre ID" required>
+    <button type="submit">Add Relation</button>
+  </form>
+
+  <p>&nbsp;</p>
+  <!-- Update Game Form -->
+  <h3>Update Game</h3>
+  <form id="updateGameForm">
+    <input type="hidden" id="updateGameID" required> <!-- Hidden field for Game ID -->
+    <input type="text" id="updateGameTitle" placeholder="New Title" required>
+    <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
+    <input type="text" id="updateGamePrice" placeholder="New Price" required>
+    <input type="text" id="updateGameDeveloper" placeholder="New Developer ID" required>
+    <input type="text" id="updateGameFranchise" placeholder="New Franchise ID" required>
+    <button type="submit">Update Game</button>
+  </form>
+
+  <p>&nbsp;</p>
+  <!-- Update Genre Form -->
+  <h3>Update Genre</h3>
+  <form id="updateGenreForm">
+    <input type="hidden" id="updateGenreID" required> <!-- Hidden field for Genre ID -->
+    <input type="text" id="updateGenreName" placeholder="New Genre Name" required>
+    <button type="submit">Update Genre</button>
+  </form>
+
+  <p>&nbsp;</p>
+  <!-- Update Game-Genre Relation Form -->
+  <h3>Update Game-Genre Relation</h3>
+  <form id="updateGameGenreForm">
+    <input type="hidden" id="updateGameGenreID" required> <!-- Hidden field for Game-Genre Relation ID -->
+    <input type="text" id="updateRelationGameID" placeholder="Game ID" required>
+    <input type="text" id="updateRelationGenreID" placeholder="New Genre ID" required>
+    <button type="submit">Update Relation</button>
+  </form>
+
+  <script>
+    // Sample data 
+    const games = [
+      // Populate games data here
+      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developerID: "1", franchiseID: "1" },
+      { gameID: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developerID: "1", franchiseID: "1" },
+      { gameID: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developerID: "1", franchiseID: "1" },
+      { gameID: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developerID: "1", franchiseID: "1" },
+      { gameID: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developerID: "1", franchiseID: "1" }
+      // Add more objects as needed
+    ];
+
+    const gameHasGenres = [
+      // Populate games data here
+      { gameHasGenresID: "1", gameID: "1", genreID: "1" },
+      { gameHasGenresID: "2", gameID: "2", genreID: "1" },
+      { gameHasGenresID: "3", gameID: "3", genreID: "1" },
+      { gameHasGenresID: "4", gameID: "4", genreID: "1" },
+      { gameHasGenresID: "5", gameID: "5", genreID: "1" }
+      // Add more objects as needed
+    ];
+
+    const genres = [
+      // Populate games data here
+      { genreID: "1", name: "action-adventure" },
+      { genreID: "2", name: "horror" },
+      { genreID: "3", name: "fantasy" },
+      { genreID: "4", name: "fighting" },
+      { genreID: "5", name: "racing" }
+      // Add more objects as needed
+    ];
+
+    function renderTables() {
+      // Reset header
+      const gamesBody = document.querySelector("#gamesList");
+      gamesBody.innerHTML = `
+      <tr>
+        <th>Game ID</th>
+        <th>Title</th>
+        <th>Release Year</th>
+        <th>Price</th>
+        <th>Developer</th>
+        <th>Franchise</th>
+        <th>Action</th>
+      </tr>
+    `;
+
+      const genresBody = document.querySelector("#genresList");
+      genresBody.innerHTML = `
+      <tr>
+        <th>genreID</th>
+        <th>name</th>
+        <th>Action</th>
+      </tr>
+    `;
+
+      const gameHasGenresBody = document.querySelector("#gameHasGenresList");
+      gameHasGenresBody.innerHTML = `
+      <tr>
+        <th>gameHasGenresID</th>
+        <th>gameID</th>
+        <th>genreID</th>
+        <th>Action</th>
+      </tr>
+    `;
+
+      // Iterate over array to render row
+      games.forEach(game => {
+        const row = gamesBody.insertRow();
+        row.innerHTML = `
+        <td>${game.gameID}</td>
+        <td>${game.title}</td>
+        <td>${game.releaseYear}</td>
+        <td>${game.price}</td>
+        <td>${game.developerID}</td>
+        <td>${game.franchiseID}</td>
+        <td>
+          <button type="button">Update</button>
+          <button type="button">Delete</button>
+        </td>
+      `;
+      });
+
+      genres.forEach(genre => {
+        const row = genresBody.insertRow();
+        row.innerHTML = `
+        <td>${genre.genreID}</td>
+        <td>${genre.name}</td>
+        <td>
+          <button type="button">Update</button>
+          <button type="button">Delete</button>
+        </td>
+      `;
+      });
+
+      gameHasGenres.forEach(gameGenre => {
+        const row = gameHasGenresBody.insertRow();
+        row.innerHTML = `
+        <td>${gameGenre.gameHasGenresID}</td>
+        <td>${gameGenre.gameID}</td>
+        <td>${gameGenre.genreID}</td>
+        <td>
+          <button type="button">Update</button>
+          <button type="button">Delete</button>
+        </td>
+      `;
+      });
+    }
+
+    window.onload = renderTables; // Initial render
+
+  </script>
 </body>
+
 </html>
