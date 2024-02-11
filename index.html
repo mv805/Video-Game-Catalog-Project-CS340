@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Team 22</title>
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1><strong>Game Quest: Video Game Store</strong></h1>
+</header>
+<!-- Links to pages -->
+<nav class="global-nav">
+  <a href="genre.html">Genres</a> | 
+  <a href="platform.html">Platforms</a> | 
+  <a href="orders.html">Orders</a> | 
+  <a href="customers.html">Customers</a> |
+  <a href="franchise.html">Franchises</a> |
+  <a href="developer.html">Developers</a>
+</nav>
+<p>&nbsp;</p>
+<h2>Game Inventory:</h2>
+<div id="gamesList">
+<!-- Table to display game details -->
+<table>
+  <tr>
+    <th>Game ID</th>
+    <th>Title</th>
+    <th>Release Year</th>
+    <th>Price</th>
+    <th>Developer</th>
+    <th>Franchise</th>
+  </tr>
+  <!-- Game entries will be dynamically inserted here -->
+</table>
+</div>
+<script>
+// Sample data 
+const games = [
+  // Populate games data here
+  { id: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
+  { id: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
+  { id: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
+  { id: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
+  { id: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developer: "Nintendo & MercurySteam", franchise: "Metroid" }
+  // Add more game objects as needed
+];
+
+function renderGames() {
+  // Reset header
+  const tableBody = document.querySelector("#gamesList table");
+  tableBody.innerHTML = `
+    <tr>
+      <th>Game ID</th>
+      <th>Title</th>
+      <th>Release Year</th>
+      <th>Price</th>
+      <th>Developer</th>
+      <th>Franchise</th>
+    </tr>
+  `; 
+  // Iterate over games array
+  games.forEach(game => {
+    const row = tableBody.insertRow();
+    row.innerHTML = `
+      <td>${game.id}</td>
+      <td>${game.title}</td>
+      <td>${game.releaseYear}</td>
+      <td>${game.price}</td>
+      <td>${game.developer}</td>
+      <td>${game.franchise}</td>
+    `; // Iterate over games array
+  });
+}
+
+window.onload = renderGames; // Initial render
+
+</script>
+
+</body>
+</html>
