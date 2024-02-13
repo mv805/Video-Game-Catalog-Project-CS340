@@ -5,10 +5,10 @@
  !colon: character being used to denote the variables that will have data from the backend programming language
  */
 /* 
- Inventory page queries
+ Games and Genres page queries
  */
 --
--- get all the games in inventory
+-- get all the games in inventory for reference for the genres game page
 SELECT Games.gameID,
     Games.title,
     Games.releaseYear,
