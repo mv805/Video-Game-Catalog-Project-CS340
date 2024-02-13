@@ -14,10 +14,8 @@ SELECT Games.gameID,
     Games.releaseYear,
     Games.price,
     Developers.name as Developer,
-    Developers.developerID as `Developer ID`,
     Franchises.title as Franchise,
-    Franchises.franchiseID as `Franchise ID`
-FROM Games
+    FROM Games
     LEFT JOIN Developers ON Developers.developerID = Games.developerID
     LEFT JOIN Franchises ON Franchises.franchiseID = Games.franchiseID
 ORDER BY Games.gameID;
@@ -31,10 +29,8 @@ ORDER BY genreID;
 --Get all the games and genre combinations
 SELECT GameHasGenres.gameHasGenresID,
     Games.title as Game,
-    Games.gameID as `Game ID`,
     Genres.name as Genre,
-    Genres.genreID as `Genre ID`
-FROM GameHasGenres
+    FROM GameHasGenres
     JOIN Games ON Games.gameID = GameHasGenres.gameID
     JOIN Genres ON Genres.genreID = GameHasGenres.genreID
 ORDER BY Games.title;

@@ -38,9 +38,7 @@
         <th>Release Year</th>
         <th>Price</th>
         <th>Developer</th>
-        <th>Developer ID</th>
         <th>Franchise</th>
-        <th>Franchise ID</th>
       </tr>
     </table>
 
@@ -246,9 +244,7 @@
           releaseYear: "1986",
           price: "$59.99",
           developer: "Nintendo",
-          developerID: "1",
           franchise: "Metroid",
-          franchiseID: "1",
         },
         {
           gameID: "2",
@@ -256,9 +252,7 @@
           releaseYear: "1991",
           price: "$59.99",
           developer: "Nintendo",
-          developerID: "1",
           franchise: "Metroid",
-          franchiseID: "1",
         },
         {
           gameID: "3",
@@ -266,9 +260,7 @@
           releaseYear: "1994",
           price: "$59.99",
           developer: "Nintendo",
-          developerID: "1",
           franchise: "Metroid",
-          franchiseID: "1",
         },
         {
           gameID: "4",
@@ -276,9 +268,7 @@
           releaseYear: "2002",
           price: "$59.99",
           developer: "Nintendo",
-          developerID: "1",
           franchise: "Metroid",
-          franchiseID: "1",
         },
         {
           gameID: "5",
@@ -286,9 +276,7 @@
           releaseYear: "2021",
           price: "$59.99",
           developer: "Nintendo",
-          developerID: "1",
           franchise: "Metroid",
-          franchiseID: "1",
         },
       ];
 
@@ -297,37 +285,27 @@
         {
           gameHasGenresID: "1",
           game: "Metroid",
-          gameID: "1",
           genre: "action-adventure",
-          genreID: "1",
         },
         {
           gameHasGenresID: "2",
           game: "Metroid II: Return of Samus",
-          gameID: "2",
           genre: "action-adventure",
-          genreID: "1",
         },
         {
           gameHasGenresID: "3",
           game: "Super Metroid",
-          gameID: "3",
           genre: "action-adventure",
-          genreID: "1",
         },
         {
           gameHasGenresID: "4",
           game: "Metroid Fusion",
-          gameID: "4",
           genre: "action-adventure",
-          genreID: "1",
         },
         {
           gameHasGenresID: "5",
           game: "Metroid Dread",
-          gameID: "5",
           genre: "action-adventure",
-          genreID: "1",
         },
       ];
 
@@ -350,9 +328,7 @@
         <th>Release Year</th>
         <th>Price</th>
         <th>Developer</th>
-        <th>Developer ID</th>
         <th>Franchise</th>
-        <th>Franchise ID</th>
         <th>Action</th>
       </tr>
     `;
@@ -371,9 +347,7 @@
       <tr>
         <th>gameHasGenresID</th>
         <th>Game</th>
-        <th>Game ID</th>
         <th>Genre</th>
-        <th>Genre ID</th>
         <th>Action</th>
       </tr>
     `;
@@ -387,9 +361,7 @@
         <td>${game.releaseYear}</td>
         <td>${game.price}</td>
         <td>${game.developer}</td>
-        <td>${game.developerID}</td>
         <td>${game.franchise}</td>
-        <td>${game.franchiseID}</td>
         <td>
           <button type="button">Update</button>
           <button type="button">Delete</button>
@@ -414,9 +386,7 @@
           row.innerHTML = `
         <td>${gameGenre.gameHasGenresID}</td>
         <td>${gameGenre.game}</td>
-        <td>${gameGenre.gameID}</td>
         <td>${gameGenre.genre}</td>
-        <td>${gameGenre.genreID}</td>
         <td>
           <button type="button">Update</button>
           <button type="button">Delete</button>
