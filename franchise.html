@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Team 22</title>
 <style>
-  table, th, td, form { 
+  table, th, td, form {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 5px;
@@ -26,10 +26,149 @@
     <a href="developer.html">Developers</a>
   </nav>
 <p>&nbsp;</p>
-<h2>Franchises:</h2>
-<script>
-// add script
-</script>
+<h2>Franchises Page</h2>
+
+  <p>&nbsp;</p>
+  <h3>Games:</h3>
+  <table id="gamesList">
+    <tr>
+      <th>Game ID</th>
+      <th>Title</th>
+      <th>Release Year</th>
+      <th>Price</th>
+      <th>Developer</th>
+      <th>Franchise</th>
+    </tr>
+  </table>
+
+  <p>&nbsp;</p>
+  <h3>Franchises:</h3>
+  <table id="franchisesList">
+    <tr>
+      <th>Franchise ID</th>
+      <th>Title</th>
+    </tr>
+  </table>
+
+  <!-- Add New Game Form -->
+<h3>Add New Game</h3>
+<form id="addGameForm">
+  <input type="text" id="gameTitle" placeholder="Title" required>
+  <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
+  <input type="text" id="gamePrice" placeholder="Price" required>
+  <select id="gameDeveloperID">
+    <option value="--developer--">--Select Developer--</option>
+  </select>
+  <select id="gameFranchiseID">
+    <option value="--franchise--">--Select Franchise--</option>
+  </select>
+  <button type="submit">Add Game</button>
+</form>
+
+<!-- Update Game Form -->
+<h3>Update Game</h3>
+<form id="updateGameForm">
+  <select id="updateGameID">
+    <option value="--gameID--">--Select Game--</option>
+  </select>
+  <input type="text" id="updateGameTitle" placeholder="New Title" required>
+  <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
+  <input type="text" id="updateGamePrice" placeholder="New Price" required>
+  <select id="updateGameDeveloperID">
+    <option value="--developer--">--Select Developer--</option>
+  </select>
+  <select id="updateGameFranchiseID">
+    <option value="--franchise--">--Select Franchise--</option>
+  </select>
+  <button type="submit">Update Game</button>
+</form>
+
+<!-- Add New Franchise Form -->
+<h3>Add New Franchise</h3>
+<form id="addFranchiseForm">
+  <input type="text" id="franchiseTitle" placeholder="Franchise Title" required>
+  <button type="submit">Add Franchise</button>
+</form>
+
+<!-- Update Franchise Form -->
+<h3>Update Franchise</h3>
+<form id="updateFranchiseForm">
+  <select id="updateFranchiseID">
+    <option value="--franchiseID--">--Select Franchise--</option>
+  </select>
+  <input type="text" id="updateFranchiseTitle" placeholder="New Franchise Title" required>
+  <button type="submit">Update Franchise</button>
+</form>
+
+  <script>
+    const games = [
+      { gameID: "1", title: "Metroid Prime", releaseYear: "2002", price: "$59.99", developer: "Retro Studios", franchise: "Metroid" },
+      { gameID: "2", title: "Super Mario Odyssey", releaseYear: "2017", price: "$59.99", developer: "Nintendo", franchise: "Super Mario" },
+      { gameID: "3", title: "F-ZERO GX", releaseYear: "2003", price: "$49.99", developer: "Amusement Vision", franchise: "F-ZERO" },
+      { gameID: "4", title: "Halo 3", releaseYear: "2007", price: "$59.99", developer: "Bungie", franchise: "Halo" },
+      { gameID: "5", title: "Doom Eternal", releaseYear: "2020", price: "$59.99", developer: "id Software", franchise: "Doom" }
+    ];
+
+    const franchises = [
+      { franchiseID: "1", title: "Metroid" },
+      { franchiseID: "2", title: "Super Mario" },
+      { franchiseID: "3", title: "F-ZERO" },
+      { franchiseID: "4", title: "Halo" },
+      { franchiseID: "5", title: "Doom" }
+    ];
+
+    function renderTables() {
+      const gamesBody = document.querySelector("#gamesList");
+      gamesBody.innerHTML = `
+      <tr>
+        <th>Game ID</th>
+        <th>Title</th>
+        <th>Release Year</th>
+        <th>Price</th>
+        <th>Developer</th>
+        <th>Franchise</th>
+        <th>Action</th>
+      </tr>`;
+
+      const franchisesBody = document.querySelector("#franchisesList");
+      franchisesBody.innerHTML = `
+      <tr>
+        <th>Franchise ID</th>
+        <th>Title</th>
+        <th>Action</th>
+      </tr>`;
+
+      games.forEach(game => {
+        const row = gamesBody.insertRow();
+        row.innerHTML = `
+        <td>${game.gameID}</td>
+        <td>${game.title}</td>
+        <td>${game.releaseYear}</td>
+        <td>${game.price}</td>
+        <td>${game.developer}</td>
+        <td>${game.franchise}</td>
+        <td>
+          <button type="button">Update</button>
+          <button type="button">Delete</button>
+        </td>
+        `;
+      });
+
+      franchises.forEach(franchise => {
+        const row = franchisesBody.insertRow();
+        row.innerHTML = `
+        <td>${franchise.franchiseID}</td>
+        <td>${franchise.title}</td>
+        <td>
+          <button type="button">Update</button>
+          <button type="button">Delete</button>
+        </td>
+        `;
+      });
+    }
+
+    window.onload = renderTables; // Initial render
+  </script>
 
 </body>
 </html>

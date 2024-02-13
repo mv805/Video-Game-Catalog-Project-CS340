@@ -17,7 +17,6 @@
   <header>
     <h1><strong>Game Quest: Video Game Store</strong></h1>
   </header>
-  <!-- Links to pages -->
   <nav class="global-nav">
     <a href="index.html">Inventory</a> |
     <a href="genre.html">Genres</a> |
@@ -41,7 +40,6 @@
       <th>Developer</th>
       <th>Franchise</th>
     </tr>
-    <!-- entries will be dynamically inserted here -->
   </table>
 
   <p>&nbsp;</p>
@@ -51,7 +49,6 @@
       <th>genreID</th>
       <th>name</th>
     </tr>
-    <!-- entries will be dynamically inserted here -->
   </table>
 
   <p>&nbsp;</p>
@@ -62,23 +59,7 @@
       <th>gameID</th>
       <th>genreID</th>
     </tr>
-    <!-- entries will be dynamically inserted here -->
   </table>
-
-
-
-
-
-
-  <!-- Questions:
-  1) do we add IDs or let incrementally increase with JavaScript
-  2) Modify plurality for consistency 
-  3) do we allow IDs for CRUD operations-->
-
-
-
-
-
 
   <!-- Input Text Box to Insert -->
   <p>&nbsp;</p>
@@ -87,8 +68,18 @@
     <input type="text" id="gameTitle" placeholder="Title" required>
     <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
     <input type="text" id="gamePrice" placeholder="Price" required>
-    <input type="text" id="gameDeveloper" placeholder="Developer ID" required>
-    <input type="text" id="gameFranchise" placeholder="Franchise ID" required>
+      <select id="franchiseID">
+        <option value="--franchise--"> --Select Franchise--</option>
+        <option value="Metroid">Metroid</option>
+        <option value="Super Mario">Super Mario</option>
+        <option value="F-ZERO">F-ZERO</option>
+      </select>
+      <select id="developerID">
+        <option value="--developer--">--Select Developer--</option>
+        <option value="Retro Studios">Retro Studios</option>
+        <option value="Ubisoft">Ubisoft</option>
+        <option value="EA Games">EA Games</option>
+      </select>
     <button type="submit">Add Game</button>
   </form>
 
@@ -104,8 +95,18 @@
   <p>&nbsp;</p>
   <h3>Add New Game-Genre Relation</h3>
   <form id="addGameGenreForm">
-    <input type="text" id="associationGameID" placeholder="Game ID" required>
-    <input type="text" id="associationGenreID" placeholder="Genre ID" required>
+    <select id="gameID">
+      <option value="--gameID--"> --Select gameID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <select id="genreID">
+      <option value="--genreID--">--Select genreID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
     <button type="submit">Add Relation</button>
   </form>
 
@@ -113,12 +114,27 @@
   <!-- Update Game Form -->
   <h3>Update Game</h3>
   <form id="updateGameForm">
-    <input type="hidden" id="updateGameID" required> <!-- Hidden field for Game ID -->
+    <select id="gameID">
+      <option value="--gameID--"> --Select gameID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
     <input type="text" id="updateGameTitle" placeholder="New Title" required>
     <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
     <input type="text" id="updateGamePrice" placeholder="New Price" required>
-    <input type="text" id="updateGameDeveloper" placeholder="New Developer ID" required>
-    <input type="text" id="updateGameFranchise" placeholder="New Franchise ID" required>
+    <select id="franchiseID">
+      <option value="--franchise--"> --Select Franchise--</option>
+      <option value="Metroid">Metroid</option>
+      <option value="Super Mario">Super Mario</option>
+      <option value="F-ZERO">F-ZERO</option>
+    </select>
+    <select id="developerID">
+      <option value="--developer--">--Select Developer--</option>
+      <option value="Retro Studios">Retro Studios</option>
+      <option value="Ubisoft">Ubisoft</option>
+      <option value="EA Games">EA Games</option>
+    </select>
     <button type="submit">Update Game</button>
   </form>
 
@@ -126,7 +142,12 @@
   <!-- Update Genre Form -->
   <h3>Update Genre</h3>
   <form id="updateGenreForm">
-    <input type="hidden" id="updateGenreID" required> <!-- Hidden field for Genre ID -->
+    <select id="genreID">
+      <option value="--genreID--">--Select genreID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
     <input type="text" id="updateGenreName" placeholder="New Genre Name" required>
     <button type="submit">Update Genre</button>
   </form>
@@ -135,9 +156,24 @@
   <!-- Update Game-Genre Relation Form -->
   <h3>Update Game-Genre Relation</h3>
   <form id="updateGameGenreForm">
-    <input type="hidden" id="updateGameGenreID" required> <!-- Hidden field for Game-Genre Relation ID -->
-    <input type="text" id="updateRelationGameID" placeholder="Game ID" required>
-    <input type="text" id="updateRelationGenreID" placeholder="New Genre ID" required>
+    <select id="gameHasGenreID">
+      <option value="--gameHasGenreID--"> --Select gameHasGenreID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <select id="gameID">
+      <option value="--gameID--"> --Select gameID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <select id="genreID">
+      <option value="--genreID--">--Select genreID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
     <button type="submit">Update Relation</button>
   </form>
 
@@ -150,7 +186,6 @@
       { gameID: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developerID: "1", franchiseID: "1" },
       { gameID: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developerID: "1", franchiseID: "1" },
       { gameID: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developerID: "1", franchiseID: "1" }
-      // Add more objects as needed
     ];
 
     const gameHasGenres = [
@@ -160,7 +195,6 @@
       { gameHasGenresID: "3", gameID: "3", genreID: "1" },
       { gameHasGenresID: "4", gameID: "4", genreID: "1" },
       { gameHasGenresID: "5", gameID: "5", genreID: "1" }
-      // Add more objects as needed
     ];
 
     const genres = [
@@ -170,7 +204,6 @@
       { genreID: "3", name: "fantasy" },
       { genreID: "4", name: "fighting" },
       { genreID: "5", name: "racing" }
-      // Add more objects as needed
     ];
 
     function renderTables() {
@@ -182,8 +215,8 @@
         <th>Title</th>
         <th>Release Year</th>
         <th>Price</th>
-        <th>Developer</th>
-        <th>Franchise</th>
+        <th>Developer ID</th>
+        <th>Franchise ID</th>
         <th>Action</th>
       </tr>
     `;

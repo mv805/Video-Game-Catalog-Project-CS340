@@ -15,7 +15,6 @@
 <header>
   <h1><strong>Game Quest: Video Game Store</strong></h1>
 </header>
-<!-- Links to pages -->
 <nav class="global-nav">
     <a href="index.html">Inventory</a> |
     <a href="genre.html">Genres</a> | 
@@ -26,9 +25,267 @@
     <a href="developer.html">Developers</a>
   </nav>
 <p>&nbsp;</p>
-<h2>Orders:</h2>
+<h2>Orders Page</h2>
+
+<p>&nbsp;</p>
+<h3>Games:</h3>
+<table id="gamesList">
+  <tr>
+    <th>Game ID</th>
+    <th>Title</th>
+    <th>Release Year</th>
+    <th>Price</th>
+    <th>Developer</th>
+    <th>Franchise</th>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<h3>Orders:</h3>
+<table id="ordersList">
+  <tr>
+    <th>orderID</th>
+    <th>date</th>
+    <th>customerID</th>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<h3>Game-Order Relation:</h3>
+<table id="gameHasOrdersList">
+  <tr>
+    <th>gameHasOrdersID</th>
+    <th>gameID</th>
+    <th>orderID</th>
+  </tr>
+</table>
+
+<!-- Input Text Box to Insert -->
+<p>&nbsp;</p>
+<h3>Add New Game</h3>
+<form id="addGameForm">
+  <input type="text" id="gameTitle" placeholder="Title" required>
+  <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
+  <input type="text" id="gamePrice" placeholder="Price" required>
+    <select id="franchiseID">
+      <option value="--franchise--"> --Select Franchise--</option>
+      <option value="Metroid">Metroid</option>
+      <option value="Super Mario">Super Mario</option>
+      <option value="F-ZERO">F-ZERO</option>
+    </select>
+    <select id="developerID">
+      <option value="--developer--">--Select Developer--</option>
+      <option value="Retro Studios">Retro Studios</option>
+      <option value="Ubisoft">Ubisoft</option>
+      <option value="EA Games">EA Games</option>
+    </select>
+  <button type="submit">Add Game</button>
+</form>
+
+<!-- Input Text Box to Insert -->
+<p>&nbsp;</p>
+<h3>Add New Order</h3>
+<form id="addOrderForm">
+  <input type="date" id="orderDate" placeholder="Order Date" required>
+  <button type="submit">Add Order</button>
+</form>
+
+<!-- Input Text Box to Insert -->
+<p>&nbsp;</p>
+<h3>Add New Game-Order Relation</h3>
+<form id="addGameOrderForm">
+  <select id="orderID">
+    <option value="--gameID--"> --Select gameID--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <select id="orderID">
+    <option value="--orderID--">--Select orderID--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <button type="submit">Add Relation</button>
+</form>
+
+<p>&nbsp;</p>
+<!-- Update Game Form -->
+<h3>Update Game</h3>
+<form id="updateGameForm">
+  <select id="gameID">
+    <option value="--gameID--"> --Select gameID--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <input type="text" id="updateGameTitle" placeholder="New Title" required>
+  <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
+  <input type="text" id="updateGamePrice" placeholder="New Price" required>
+  <select id="franchiseID">
+    <option value="--franchise--"> --Select Franchise--</option>
+    <option value="Metroid">Metroid</option>
+    <option value="Super Mario">Super Mario</option>
+    <option value="F-ZERO">F-ZERO</option>
+  </select>
+  <select id="developerID">
+    <option value="--developer--">--Select Developer--</option>
+    <option value="Retro Studios">Retro Studios</option>
+    <option value="Ubisoft">Ubisoft</option>
+    <option value="EA Games">EA Games</option>
+  </select>
+  <button type="submit">Update Game</button>
+</form>
+
+<p>&nbsp;</p>
+<!-- Update Order Form -->
+<h3>Update Order</h3>
+<form id="updateOrderForm">
+  <select id="orderID">
+    <option value="--orderID--">--Select orderID--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <input type="text" id="updateOrderName" placeholder="New Order Name" required>
+  <button type="submit">Update Order</button>
+</form>
+
+<p>&nbsp;</p>
+<!-- Update Game-Order Relation Form -->
+<h3>Update Game-Order Relation</h3>
+<form id="updateGameOrderForm">
+  <select id="gameHasOrderID">
+    <option value="--gameHasOrderID--"> --Select gameHasOrderID--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <select id="gameID">
+    <option value="--gameID--"> --Select gameID--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <select id="orderID">
+    <option value="--orderID--">--Select orderID--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <button type="submit">Update Relation</button>
+</form>
+
 <script>
-// add script
+  // Sample data 
+  const games = [
+    // Populate games data here
+    { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developerID: "1", franchiseID: "1" },
+    { gameID: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developerID: "1", franchiseID: "1" },
+    { gameID: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developerID: "1", franchiseID: "1" },
+    { gameID: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developerID: "1", franchiseID: "1" },
+    { gameID: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developerID: "1", franchiseID: "1" }
+  ];
+
+  const gameHasOrders = [
+    // Populate games data here
+    { gameHasOrdersID: "1", gameID: "1", orderID: "1" },
+    { gameHasOrdersID: "2", gameID: "2", orderID: "1" },
+    { gameHasOrdersID: "3", gameID: "3", orderID: "1" },
+    { gameHasOrdersID: "4", gameID: "4", orderID: "1" },
+    { gameHasOrdersID: "5", gameID: "5", orderID: "1" }
+  ];
+
+  const orders = [
+    // Populate games data here
+    { orderID: "1", date: "01/01/2022", customerID: "1" },
+    { orderID: "2", date: "01/01/2022", customerID: "2" },
+    { orderID: "3", date: "01/01/2022", customerID: "3" },
+    { orderID: "4", date: "01/01/2022", customerID: "4" },
+    { orderID: "5", date: "01/01/2022", customerID: "5" }
+  ];
+
+  function renderTables() {
+    // Reset header
+    const gamesBody = document.querySelector("#gamesList");
+    gamesBody.innerHTML = `
+    <tr>
+      <th>Game ID</th>
+      <th>Title</th>
+      <th>Release Year</th>
+      <th>Price</th>
+      <th>Developer ID</th>
+      <th>Franchise ID</th>
+      <th>Action</th>
+    </tr>
+  `;
+
+    const ordersBody = document.querySelector("#ordersList");
+    ordersBody.innerHTML = `
+    <tr>
+      <th>orderID</th>
+      <th>date</th>
+      <th>customerID</th>
+      <th>Action</th>
+    </tr>
+  `;
+
+    const gameHasOrdersBody = document.querySelector("#gameHasOrdersList");
+    gameHasOrdersBody.innerHTML = `
+    <tr>
+      <th>gameHasOrderID</th>
+      <th>gameID</th>
+      <th>orderID</th>
+      <th>Action</th>
+    </tr>
+  `;
+
+    // Iterate over array to render row
+    games.forEach(game => {
+      const row = gamesBody.insertRow();
+      row.innerHTML = `
+      <td>${game.gameID}</td>
+      <td>${game.title}</td>
+      <td>${game.releaseYear}</td>
+      <td>${game.price}</td>
+      <td>${game.developerID}</td>
+      <td>${game.franchiseID}</td>
+      <td>
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+      </td>
+    `;
+    });
+
+    orders.forEach(order => {
+      const row = ordersBody.insertRow();
+      row.innerHTML = `
+      <td>${order.orderID}</td>
+      <td>${order.date}</td>
+      <td>${order.customerID}</td>
+      <td>
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+      </td>
+    `;
+    });
+
+    gameHasOrders.forEach(gameOrder => {
+      const row = gameHasOrdersBody.insertRow();
+      row.innerHTML = `
+      <td>${gameOrder.gameHasOrdersID}</td>
+      <td>${gameOrder.gameID}</td>
+      <td>${gameOrder.orderID}</td>
+      <td>
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+      </td>
+    `;
+    });
+  }
+
+  window.onload = renderTables; // Initial render
+
 </script>
 
 </body>

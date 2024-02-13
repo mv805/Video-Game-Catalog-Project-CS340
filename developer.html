@@ -15,7 +15,6 @@
 <header>
   <h1><strong>Game Quest: Video Game Store</strong></h1>
 </header>
-<!-- Links to pages -->
 <nav class="global-nav">
     <a href="index.html">Inventory</a> |
     <a href="genre.html">Genres</a> | 
@@ -26,10 +25,160 @@
     <a href="developer.html">Developers</a>
   </nav>
 <p>&nbsp;</p>
-<h2>Developers:</h2>
-<script>
-// add script
-</script>
+<h2>Developers Page</h2>
+
+  <p>&nbsp;</p>
+  <h3>Games:</h3>
+  <table id="gamesList">
+    <tr>
+      <th>Game ID</th>
+      <th>Title</th>
+      <th>Release Year</th>
+      <th>Price</th>
+      <th>Developer</th>
+      <th>Franchise</th>
+    </tr>
+  </table>
+
+  <p>&nbsp;</p>
+  <h3>Developers:</h3>
+  <table id="developersList">
+    <tr>
+      <th>Developer ID</th>
+      <th>Name</th>
+    </tr>
+  </table>
+
+  <h3>Add New Game</h3>
+  <form id="addGameForm">
+    <input type="text" id="gameTitle" placeholder="Title" required>
+    <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
+    <input type="text" id="gamePrice" placeholder="Price" required>
+      <select id="franchiseID">
+        <option value="--franchise--"> --Select Franchise--</option>
+        <option value="Metroid">Metroid</option>
+        <option value="Super Mario">Super Mario</option>
+        <option value="F-ZERO">F-ZERO</option>
+      </select>
+      <select id="developerID">
+        <option value="--developer--">--Select Developer--</option>
+        <option value="Retro Studios">Retro Studios</option>
+        <option value="Ubisoft">Ubisoft</option>
+        <option value="EA Games">EA Games</option>
+      </select>
+    <button type="submit">Add Game</button>
+  </form>
+
+  <h3>Update Game</h3>
+  <form id="updateGameForm">
+    <select id="gameID">
+      <option value="--gameID--"> --Select gameID--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <input type="text" id="updateGameTitle" placeholder="New Title" required>
+    <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
+    <input type="text" id="updateGamePrice" placeholder="New Price" required>
+    <select id="franchiseID">
+      <option value="--franchise--"> --Select Franchise--</option>
+      <option value="Metroid">Metroid</option>
+      <option value="Super Mario">Super Mario</option>
+      <option value="F-ZERO">F-ZERO</option>
+    </select>
+    <select id="developerID">
+      <option value="--developer--">--Select Developer--</option>
+      <option value="Retro Studios">Retro Studios</option>
+      <option value="Ubisoft">Ubisoft</option>
+      <option value="EA Games">EA Games</option>
+    </select>
+    <button type="submit">Update Game</button>
+  </form>
+
+  <h3>Add New Developer</h3>
+  <form id="addDeveloperForm">
+    <input type="text" id="developerName" placeholder="Developer Name" required>
+    <button type="submit">Add Developer</button>
+  </form>
+  
+  <h3>Update Developer</h3>
+  <form id="updateDeveloperForm">
+    <select id="updateDeveloperID">
+      <option value="--developerID--">--Select Developer--</option>
+      <option value="Retro Studios">Retro Studios</option>
+      <option value="Ubisoft">Ubisoft</option>
+      <option value="EA Games">EA Games</option>
+    </select>
+    <input type="text" id="updateDeveloperName" placeholder="New Developer Name" required>
+    <button type="submit">Update Developer</button>
+  </form>
+
+  <script>
+    const games = [
+      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Retro Studios", franchise: "Metroid" },
+      { gameID: "2", title: "Call of Duty", releaseYear: "2003", price: "$59.99", developer: "Activision", franchise: "Call of Duty" },
+      { gameID: "3", title: "Assassin's Creed", releaseYear: "2007", price: "$59.99", developer: "Ubisoft", franchise: "Assassin's Creed" }
+    ];
+
+    const developers = [
+      { developerID: "1", name: "Retro Studios" },
+      { developerID: "2", name: "Activision" },
+      { developerID: "3", name: "Ubisoft" }
+    ];
+
+    function renderTables() {
+      const gamesBody = document.querySelector("#gamesList");
+      gamesBody.innerHTML = `
+      <tr>
+        <th>Game ID</th>
+        <th>Title</th>
+        <th>Release Year</th>
+        <th>Price</th>
+        <th>Developer</th>
+        <th>Franchise</th>
+        <th>Action</th>
+      </tr>`;
+
+      const developersBody = document.querySelector("#developersList");
+      developersBody.innerHTML = `
+      <tr>
+        <th>Developer ID</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>`;
+
+      games.forEach(game => {
+        const row = gamesBody.insertRow();
+        row.innerHTML = `
+        <td>${game.gameID}</td>
+        <td>${game.title}</td>
+        <td>${game.releaseYear}</td>
+        <td>${game.price}</td>
+        <td>${game.developer}</td>
+        <td>${game.franchise}</td>
+        <td>
+          <button type="button">Update</button>
+          <button type="button">Delete</button>
+        </td>
+        `;
+      });
+
+      developers.forEach(developer => {
+        const row = developersBody.insertRow();
+        row.innerHTML = `
+        <td>${developer.developerID}</td>
+        <td>${developer.name}</td>
+        <td>
+          <button type="button">Update</button>
+          <button type="button">Delete</button>
+        </td>
+        `;
+      });
+    }
+
+    window.onload = renderTables; // Initial render
+
+  </script>
 
 </body>
 </html>
