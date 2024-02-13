@@ -27,7 +27,6 @@
 <p>&nbsp;</p>
 <h2>Customers Page</h2>
 
-<p>&nbsp;</p>
 <h3>Customers:</h3>
 <table id="customersList">
   <tr>
@@ -39,7 +38,6 @@
   </tr>
 </table>
 
-<p>&nbsp;</p>
 <h3>Orders:</h3>
 <table id="ordersList">
   <tr>
@@ -60,9 +58,7 @@
 
 <h3>Update Customer</h3>
 <form id="updateCustomerForm">
-  <select id="updateCustomerID">
-    <option value="--customerID--">--Select Customer--</option>
-  </select>
+  <input type="text" id="updateCustomerID" placeholder="Customer ID" required>
   <input type="text" id="updateCustomerFirstName" placeholder="New First Name" required>
   <input type="text" id="updateCustomerLastName" placeholder="New Last Name" required>
   <input type="email" id="updateCustomerEmail" placeholder="New Email" required>
@@ -81,12 +77,7 @@
 
 <h3>Update Order</h3>
 <form id="updateOrderForm">
-  <select id="orderID">
-    <option value="--orderID--">--Select orderID--</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
+  <input type="text" id="updateOrderID" placeholder="Order ID" required>
   <input type="date" id="updateOrderDate" placeholder="New Order Date" required>
   <select id="updateOrderCustomerID">
     <option value="--customerID--">--Select CustomerID--</option>

@@ -71,12 +71,7 @@
 
   <h3>Update Game</h3>
   <form id="updateGameForm">
-    <select id="gameID">
-      <option value="--gameID--"> --Select gameID--</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-    </select>
+    <input type="text" id="updateGameID" placeholder="Game ID" required>
     <input type="text" id="updateGameTitle" placeholder="New Title" required>
     <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
     <input type="text" id="updateGamePrice" placeholder="New Price" required>
@@ -103,12 +98,7 @@
   
   <h3>Update Developer</h3>
   <form id="updateDeveloperForm">
-    <select id="updateDeveloperID">
-      <option value="--developerID--">--Select Developer--</option>
-      <option value="Retro Studios">Retro Studios</option>
-      <option value="Ubisoft">Ubisoft</option>
-      <option value="EA Games">EA Games</option>
-    </select>
+    <input type="text" id="updateDeveloperID" placeholder="Developer ID" required>
     <input type="text" id="updateDeveloperName" placeholder="New Developer Name" required>
     <button type="submit">Update Developer</button>
   </form>
