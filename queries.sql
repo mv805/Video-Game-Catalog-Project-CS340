@@ -13,22 +13,27 @@ SELECT Games.gameID,
     Games.title,
     Games.releaseYear,
     Games.price,
-    Developers.name as developer,
-    Franchises.title as franchise
+    Developers.name as Developer,
+    Developers.developerID as `Developer ID`,
+    Franchises.title as Franchise,
+    Franchises.franchiseID as `Franchise ID`
 FROM Games
     LEFT JOIN Developers ON Developers.developerID = Games.developerID
     LEFT JOIN Franchises ON Franchises.franchiseID = Games.franchiseID
 ORDER BY Games.gameID;
 --
 -- Get all the genres of games
-SELECT *
+SELECT genreID,
+    name as Name
 FROM Genres
 ORDER BY genreID;
 --
 --Get all the games and genre combinations
 SELECT GameHasGenres.gameHasGenresID,
-    Games.title as game,
-    Genres.name as genre
+    Games.title as Game,
+    Games.gameID as `Game ID`,
+    Genres.name as Genre,
+    Genres.genreID as `Genre ID`
 FROM GameHasGenres
     JOIN Games ON Games.gameID = GameHasGenres.gameID
     JOIN Genres ON Genres.genreID = GameHasGenres.genreID
@@ -80,3 +85,14 @@ UPDATE GameHasGenres
 SET gameID = :gameID,
     genreID = :genreID
 WHERE gameHasGenresID = :gameGenreIDtoUpdate;
+--
+--Delete a game
+DELETE FROM Games
+WHERE gameID = :idOfGameToDelete;
+--
+--Delete a game-genre relationship
+DELETE FROM GameHasGenres
+WHERE gameID = :idOfGameAndGenreToDelete;
+--Delete a genre 
+DELETE FROM Genres
+WHERE genreID = :idOfGenreToDelete;
