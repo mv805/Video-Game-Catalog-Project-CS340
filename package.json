@@ -1,0 +1,24 @@
+{
+  "name": "step2-340",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mv805/Video-Game-Store-Step2-340.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mv805/Video-Game-Store-Step2-340/issues"
+  },
+  "homepage": "https://github.com/mv805/Video-Game-Store-Step2-340#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
