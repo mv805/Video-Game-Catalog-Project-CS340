@@ -56,10 +56,10 @@
   <input type="text" id="gameTitle" placeholder="Title" required>
   <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
   <input type="text" id="gamePrice" placeholder="Price" required>
-  <select id="gameDeveloperID">
+  <select id="gameDeveloper">
     <option value="--developer--">--Select Developer--</option>
   </select>
-  <select id="gameFranchiseID">
+  <select id="gameFranchise">
     <option value="--franchise--">--Select Franchise--</option>
   </select>
   <button type="submit">Add Game</button>
@@ -68,16 +68,14 @@
 <!-- Update Game Form -->
 <h3>Update Game</h3>
 <form id="updateGameForm">
-  <select id="updateGameID">
-    <option value="--gameID--">--Select Game--</option>
-  </select>
+  <input type="text" id="updateGameID" placeholder="Game ID" required>
   <input type="text" id="updateGameTitle" placeholder="New Title" required>
   <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
   <input type="text" id="updateGamePrice" placeholder="New Price" required>
-  <select id="updateGameDeveloperID">
+  <select id="updateGameDeveloper">
     <option value="--developer--">--Select Developer--</option>
   </select>
-  <select id="updateGameFranchiseID">
+  <select id="updateGameFranchise">
     <option value="--franchise--">--Select Franchise--</option>
   </select>
   <button type="submit">Update Game</button>
@@ -93,9 +91,7 @@
 <!-- Update Franchise Form -->
 <h3>Update Franchise</h3>
 <form id="updateFranchiseForm">
-  <select id="updateFranchiseID">
-    <option value="--franchiseID--">--Select Franchise--</option>
-  </select>
+  <input type="text" id="updateFranchiseID" placeholder="Franchise ID" required>
   <input type="text" id="updateFranchiseTitle" placeholder="New Franchise Title" required>
   <button type="submit">Update Franchise</button>
 </form>
