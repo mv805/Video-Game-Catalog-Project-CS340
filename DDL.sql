@@ -88,27 +88,27 @@ CREATE TABLE IF NOT EXISTS Platforms (
     PRIMARY KEY (platformID)
 );
 -- -----------------------------------------------------
--- Table OrderHasGames
+-- Table GameHasOrders
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS OrderHasGames;
-CREATE TABLE IF NOT EXISTS OrderHasGames (
-    orderHasGamesID INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS GameHasOrders;
+CREATE TABLE IF NOT EXISTS GameHasOrders (
+    gameHasOrderID INT NOT NULL AUTO_INCREMENT,
     gameID INT NOT NULL,
     orderID INT NOT NULL,
-    PRIMARY KEY (orderHasGamesID),
+    PRIMARY KEY (gameHasOrderID),
     -- The application logic will not allow deletion of orders since they are important historical transactions. If a game is associated with an order, it will also not be allowed to be deleted, but can be marked 'inactive'. This is needed to preserve transaction history. However if for admin reasons, the games or orders are desired to be deleted, it will clean up the records here in the junction table.
     FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
     FOREIGN KEY (orderID) REFERENCES Orders(orderID) ON DELETE CASCADE
 );
 -- -----------------------------------------------------
--- Table PlatformHasGames
+-- Table GameHasPlatforms
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS PlatformHasGames;
-CREATE TABLE IF NOT EXISTS PlatformHasGames (
-    platformHasGamesID INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS GameHasPlatforms;
+CREATE TABLE IF NOT EXISTS GameHasPlatforms (
+    gameHasPlatformID INT NOT NULL AUTO_INCREMENT,
     gameID INT NOT NULL,
     platformID INT NOT NULL,
-    PRIMARY KEY (platformHasGamesID),
+    PRIMARY KEY (gameHasPlatformID),
     UNIQUE(gameID, platformID),
     -- deleting a game or platform should delete its entry in this junction table
     FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
@@ -119,10 +119,10 @@ CREATE TABLE IF NOT EXISTS PlatformHasGames (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS GameHasGenres;
 CREATE TABLE IF NOT EXISTS GameHasGenres (
-    gameHasGenresID INT NOT NULL AUTO_INCREMENT,
+    gameHasGenreID INT NOT NULL AUTO_INCREMENT,
     gameID INT NOT NULL,
     genreID INT NOT NULL,
-    PRIMARY KEY (gameHasGenresID),
+    PRIMARY KEY (gameHasGenreID),
     UNIQUE (gameID, genreID),
     -- deleting a game or genre should delete its entry in this junction table
     FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
@@ -227,7 +227,7 @@ COMMIT;
 -- Data for table OrderHasGames
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO OrderHasGames (orderHasGamesID, gameID, orderID) VALUES 
+INSERT INTO GameHasOrders (gameHasOrderID, gameID, orderID) VALUES 
 (1, 1, 1),
 (2, 2, 1),
 (3, 4, 2),
@@ -242,7 +242,7 @@ COMMIT;
 -- Data for table PlatformHasGames
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO PlatformHasGames (platformHasGamesID, gameID, platformID) VALUES 
+INSERT INTO GameHasPlatforms (gameHasPlatformID, gameID, platformID) VALUES 
 (1, 4, 2),
 (2, 3, 1),
 (3, 3, 4),
@@ -258,7 +258,7 @@ COMMIT;
 -- Data for table GameHasGenres
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO GameHasGenres (gameHasGenresID, gameID, genreID) VALUES 
+INSERT INTO GameHasGenres (gameHasGenreID, gameID, genreID) VALUES 
 (1, 1, 3),
 (2, 1, 4),
 (3, 2, 4),
