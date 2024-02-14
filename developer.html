@@ -37,6 +37,7 @@
       <th>Price</th>
       <th>Developer</th>
       <th>Franchise</th>
+      <th>Active Inventory</th>
     </tr>
   </table>
 
@@ -56,16 +57,11 @@
     <input type="text" id="gamePrice" placeholder="Price" required>
       <select id="franchiseID">
         <option value="--franchise--"> --Select Franchise--</option>
-        <option value="Metroid">Metroid</option>
-        <option value="Super Mario">Super Mario</option>
-        <option value="F-ZERO">F-ZERO</option>
       </select>
       <select id="developerID">
         <option value="--developer--">--Select Developer--</option>
-        <option value="Retro Studios">Retro Studios</option>
-        <option value="Ubisoft">Ubisoft</option>
-        <option value="EA Games">EA Games</option>
       </select>
+    <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
     <button type="submit">Add Game</button>
   </form>
 
@@ -77,16 +73,11 @@
     <input type="text" id="updateGamePrice" placeholder="New Price" required>
     <select id="franchiseID">
       <option value="--franchise--"> --Select Franchise--</option>
-      <option value="Metroid">Metroid</option>
-      <option value="Super Mario">Super Mario</option>
-      <option value="F-ZERO">F-ZERO</option>
     </select>
     <select id="developerID">
       <option value="--developer--">--Select Developer--</option>
-      <option value="Retro Studios">Retro Studios</option>
-      <option value="Ubisoft">Ubisoft</option>
-      <option value="EA Games">EA Games</option>
     </select>
+    <input type="number" id="updateActiveInventory" placeholder="Update Active Inventory Status" required>
     <button type="submit">Update Game</button>
   </form>
 
@@ -105,9 +96,9 @@
 
   <script>
     const games = [
-      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Retro Studios", franchise: "Metroid" },
-      { gameID: "2", title: "Call of Duty", releaseYear: "2003", price: "$59.99", developer: "Activision", franchise: "Call of Duty" },
-      { gameID: "3", title: "Assassin's Creed", releaseYear: "2007", price: "$59.99", developer: "Ubisoft", franchise: "Assassin's Creed" }
+      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Retro Studios", franchise: "Metroid", activeInventory: "1"},
+      { gameID: "2", title: "Call of Duty", releaseYear: "2003", price: "$59.99", developer: "Activision", franchise: "Call of Duty", activeInventory: "1"  },
+      { gameID: "3", title: "Assassin's Creed", releaseYear: "2007", price: "$59.99", developer: "Ubisoft", franchise: "Assassin's Creed", activeInventory: "1"}
     ];
 
     const developers = [
@@ -127,6 +118,7 @@
         <th>Developer</th>
         <th>Franchise</th>
         <th>Action</th>
+        <th>Active Inventory</th>
       </tr>`;
 
       const developersBody = document.querySelector("#developersList");
@@ -146,6 +138,7 @@
         <td>${game.price}</td>
         <td>${game.developer}</td>
         <td>${game.franchise}</td>
+        <td>${game.activeInventory}</td>
         <td>
           <button type="button">Update</button>
           <button type="button">Delete</button>

@@ -35,6 +35,7 @@
     <th>Last Name</th>
     <th>Email</th>
     <th>Reward Points</th>
+    <th>Active Customer</th>
   </tr>
 </table>
 
@@ -53,6 +54,7 @@
   <input type="text" id="customerLastName" placeholder="Last Name" required>
   <input type="email" id="customerEmail" placeholder="Email" required>
   <input type="number" id="customerRewardPoints" placeholder="Reward Points" required>
+  <input type="number" id="activeCustomer" placeholder="Active Customer Status" required>
   <button type="submit">Add Customer</button>
 </form>
 
@@ -63,6 +65,7 @@
   <input type="text" id="updateCustomerLastName" placeholder="New Last Name" required>
   <input type="email" id="updateCustomerEmail" placeholder="New Email" required>
   <input type="number" id="updateCustomerRewardPoints" placeholder="New Reward Points" required>
+  <input type="number" id="updateActiveCustomer" placeholder="New Active Customer Status" required>
   <button type="submit">Update Customer</button>
 </form>
 
@@ -87,9 +90,9 @@
 
 <script>
   const customers = [
-    { customerID: "1", firstName: "Jane", lastName: "Doe", email: "jane.doe@example.com", rewardPoints: "100" },
-    { customerID: "2", firstName: "John", lastName: "Doe", email: "john.doe@example.com", rewardPoints: "150" },
-    { customerID: "3", firstName: "Alice", lastName: "Smith", email: "alice.smith@example.com", rewardPoints: "200" }
+    { customerID: "1", firstName: "Jane", lastName: "Doe", email: "jane.doe@example.com", rewardPoints: "100", activeCustomer: "1" },
+    { customerID: "2", firstName: "John", lastName: "Doe", email: "john.doe@example.com", rewardPoints: "150", activeCustomer: "1"  },
+    { customerID: "3", firstName: "Alice", lastName: "Smith", email: "alice.smith@example.com", rewardPoints: "200", activeCustomer: "1"  }
   ];
 
   const orders = [
@@ -107,6 +110,7 @@
       <th>Last Name</th>
       <th>Email</th>
       <th>Reward Points</th>
+      <th>Active Customer</th>
       <th>Action</th>
     </tr>
     `;
@@ -129,6 +133,7 @@
         <td>${customer.lastName}</td>
         <td>${customer.email}</td>
         <td>${customer.rewardPoints}</td>
+        <td>${customer.activeCustomer}</td>
         <td>
           <button type="button" onclick="updateCustomer(${customer.customerID})">Update</button>
           <button type="button" onclick="deleteCustomer(${customer.customerID})">Delete</button>
