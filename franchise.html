@@ -38,6 +38,7 @@
       <th>Price</th>
       <th>Developer</th>
       <th>Franchise</th>
+      <th>Active Inventory</th>
     </tr>
   </table>
 
@@ -62,6 +63,7 @@
   <select id="gameFranchise">
     <option value="--franchise--">--Select Franchise--</option>
   </select>
+  <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
   <button type="submit">Add Game</button>
 </form>
 
@@ -78,6 +80,7 @@
   <select id="updateGameFranchise">
     <option value="--franchise--">--Select Franchise--</option>
   </select>
+  <input type="number" id="updateActiveInventory" placeholder="Update Active Inventory Status" required>
   <button type="submit">Update Game</button>
 </form>
 
@@ -98,11 +101,11 @@
 
   <script>
     const games = [
-      { gameID: "1", title: "Metroid Prime", releaseYear: "2002", price: "$59.99", developer: "Retro Studios", franchise: "Metroid" },
-      { gameID: "2", title: "Super Mario Odyssey", releaseYear: "2017", price: "$59.99", developer: "Nintendo", franchise: "Super Mario" },
-      { gameID: "3", title: "F-ZERO GX", releaseYear: "2003", price: "$49.99", developer: "Amusement Vision", franchise: "F-ZERO" },
-      { gameID: "4", title: "Halo 3", releaseYear: "2007", price: "$59.99", developer: "Bungie", franchise: "Halo" },
-      { gameID: "5", title: "Doom Eternal", releaseYear: "2020", price: "$59.99", developer: "id Software", franchise: "Doom" }
+      { gameID: "1", title: "Metroid Prime", releaseYear: "2002", price: "$59.99", developer: "Retro Studios", franchise: "Metroid", activeInventory: "1" },
+      { gameID: "2", title: "Super Mario Odyssey", releaseYear: "2017", price: "$59.99", developer: "Nintendo", franchise: "Super Mario", activeInventory: "1" },
+      { gameID: "3", title: "F-ZERO GX", releaseYear: "2003", price: "$49.99", developer: "Amusement Vision", franchise: "F-ZERO", activeInventory: "1"  },
+      { gameID: "4", title: "Halo 3", releaseYear: "2007", price: "$59.99", developer: "Bungie", franchise: "Halo", activeInventory: "1"  },
+      { gameID: "5", title: "Doom Eternal", releaseYear: "2020", price: "$59.99", developer: "id Software", franchise: "Doom", activeInventory: "1"  }
     ];
 
     const franchises = [
@@ -123,6 +126,7 @@
         <th>Price</th>
         <th>Developer</th>
         <th>Franchise</th>
+        <th>Active Inventory</th>
         <th>Action</th>
       </tr>`;
 
@@ -143,6 +147,7 @@
         <td>${game.price}</td>
         <td>${game.developer}</td>
         <td>${game.franchise}</td>
+        <td>${game.activeInventory}</td>
         <td>
           <button type="button">Update</button>
           <button type="button">Delete</button>
