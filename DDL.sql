@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS Orders (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Platforms;
 CREATE TABLE IF NOT EXISTS Platforms (
-    platformID INT NOT NULL,
+    platformID INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(45) NOT NULL UNIQUE,
     PRIMARY KEY (platformID)
 );
