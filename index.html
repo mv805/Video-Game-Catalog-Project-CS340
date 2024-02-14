@@ -49,6 +49,7 @@
           <th>Price</th>
           <th>Developer</th>
           <th>Franchise</th>
+          <th>Active Inventory</th>
         </tr>
       </table>
     </div>
@@ -56,11 +57,11 @@
       // Sample data 
       const games = [
         // Populate games data here
-        { id: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-        { id: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-        { id: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-        { id: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-        { id: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developer: "Nintendo & MercurySteam", franchise: "Metroid" }
+        { id: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
+        { id: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developer: "Nintendo", franchise: "Metroid",  activeInventory: "1" },
+        { id: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developer: "Nintendo", franchise: "Metroid",  activeInventory: "1" },
+        { id: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developer: "Nintendo", franchise: "Metroid",  activeInventory: "1" },
+        { id: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developer: "Nintendo & MercurySteam", franchise: "Metroid" ,  activeInventory: "1"}
       ];
 
       function renderGames() {
@@ -74,6 +75,7 @@
             <th>Price</th>
             <th>Developer</th>
             <th>Franchise</th>
+            <th>Active Inventory</th>
           </tr>
         `; 
         // Iterate over games array
@@ -86,6 +88,7 @@
             <td>${game.price}</td>
             <td>${game.developer}</td>
             <td>${game.franchise}</td>
+            <td>${game.activeInventory}</td>
           `; 
         });
       }

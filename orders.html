@@ -37,6 +37,7 @@
     <th>Price</th>
     <th>Developer</th>
     <th>Franchise</th>
+    <th>Active Inventory</th>
   </tr>
 </table>
 
@@ -54,30 +55,29 @@
 <h3>Game-Order Relation:</h3>
 <table id="gameHasOrdersList">
   <tr>
-    <th>gameHasOrdersID</th>
+    <th>gameHasOrderID</th>
     <th>game</th>
     <th>order</th>
   </tr>
 </table>
 
 <!-- Input Text Box to Insert -->
-<p>&nbsp;</p>
 <h3>Add New Game</h3>
-<form id="addGameForm">
-  <input type="text" id="gameTitle" placeholder="Title" required>
-  <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
-  <input type="text" id="gamePrice" placeholder="Price" required>
-    <select id="franchiseID">
-      <option value="--franchise--"> --Select Franchise--</option>
-    </select>
-    <select id="developerID">
+  <form id="addGameForm">
+    <input type="text" id="gameTitle" placeholder="Title" required>
+    <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
+    <input type="text" id="gamePrice" placeholder="Price" required>
+    <select id="gameDeveloper">
       <option value="--developer--">--Select Developer--</option>
     </select>
-  <button type="submit">Add Game</button>
-</form>
+    <select id="gameFranchise">
+      <option value="--franchise--">--Select Franchise--</option>
+    </select>
+    <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
+    <button type="submit">Add Game</button>
+  </form>
 
 <!-- Input Text Box to Insert -->
-<p>&nbsp;</p>
 <h3>Add New Order</h3>
 <form id="addOrderForm">
   <input type="date" id="orderDate" placeholder="Order Date" required>
@@ -85,7 +85,6 @@
 </form>
 
 <!-- Input Text Box to Insert -->
-<p>&nbsp;</p>
 <h3>Add New Game-Order Relation</h3>
 <form id="addGameOrderForm">
   <select id="order">
@@ -97,24 +96,23 @@
   <button type="submit">Add Relation</button>
 </form>
 
-<p>&nbsp;</p>
 <!-- Update Game Form -->
 <h3>Update Game</h3>
-<form id="updateGameForm">
-  <input type="text" id="updateGameID" placeholder="Game ID" required>
-  <input type="text" id="updateGameTitle" placeholder="New Title" required>
-  <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
-  <input type="text" id="updateGamePrice" placeholder="New Price" required>
-  <select id="franchise">
-    <option value="--franchise--"> --Select Franchise--</option>
-  </select>
-  <select id="developer">
-    <option value="--developer--">--Select Developer--</option>
-  </select>
-  <button type="submit">Update Game</button>
-</form>
+  <form id="updateGameForm">
+    <input type="text" id="updateGameID" placeholder="Game ID" required>
+    <input type="text" id="updateGameTitle" placeholder="New Title" required>
+    <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
+    <input type="text" id="updateGamePrice" placeholder="New Price" required>
+    <select id="updateGameDeveloper">
+      <option value="--developer--">--Select Developer--</option>
+    </select>
+    <select id="updateGameFranchise">
+      <option value="--franchise--">--Select Franchise--</option>
+    </select>
+    <input type="number" id="updateActiveInventory" placeholder="Update Active Inventory Status" required>
+    <button type="submit">Update Game</button>
+  </form>
 
-<p>&nbsp;</p>
 <!-- Update Order Form -->
 <h3>Update Order</h3>
 <form id="updateOrderForm">
@@ -140,20 +138,21 @@
 <script>
   // Sample data 
   const games = [
-  // Populate games data here
-  { id: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-  { id: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-  { id: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-  { id: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developer: "Nintendo", franchise: "Metroid" },
-  { id: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developer: "Nintendo & MercurySteam", franchise: "Metroid" }
+    // Populate games data here
+    { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
+    { gameID: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
+    { gameID: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1"},
+    { gameID: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
+    { gameID: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developer: "Nintendo & MercurySteam", franchise: "Metroid", activeInventory: "1" }
   ];
 
+
   const gameHasOrders = [
-  { gameHasOrdersID: "1", game: "Metroid", date: "01/01/2022" },
-  { gameHasOrdersID: "2", game: "Metroid II: Return of Samus", date: "01/01/2022" },
-  { gameHasOrdersID: "3", game: "Super Metroid", date: "01/01/2022" },
-  { gameHasOrdersID: "4", game: "Metroid Fusion", date: "01/01/2022" },
-  { gameHasOrdersID: "5", game: "Metroid Dread", date: "01/01/2022" }
+  { gameHasOrderID: "1", game: "Metroid", date: "01/01/2022" },
+  { gameHasOrderID: "2", game: "Metroid II: Return of Samus", date: "01/01/2022" },
+  { gameHasOrderID: "3", game: "Super Metroid", date: "01/01/2022" },
+  { gameHasOrderID: "4", game: "Metroid Fusion", date: "01/01/2022" },
+  { gameHasOrderID: "5", game: "Metroid Dread", date: "01/01/2022" }
 ];
 
 
@@ -177,6 +176,7 @@
       <th>Price</th>
       <th>Developer</th>
       <th>Franchise</th>
+      <th>Active Inventory</th>
       <th>Action</th>
     </tr>
   `;
@@ -211,6 +211,7 @@
       <td>${game.price}</td>
       <td>${game.developer}</td>
       <td>${game.franchise}</td>
+      <td>${game.activeInventory}</td>
       <td>
         <button type="button">Update</button>
         <button type="button">Delete</button>
@@ -234,7 +235,7 @@
     gameHasOrders.forEach(gameOrder => {
       const row = gameHasOrdersBody.insertRow();
       row.innerHTML = `
-      <td>${gameOrder.gameHasOrdersID}</td>
+      <td>${gameOrder.gameHasOrderID}</td>
       <td>${gameOrder.game}</td>
       <td>${gameOrder.date}</td>
       <td>
