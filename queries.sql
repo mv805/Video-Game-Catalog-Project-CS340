@@ -10,20 +10,24 @@
  
  */
 -- -----------------------------------------------------
--- !Get all the games in inventory
+-- Get all the games in inventory
 -- -----------------------------------------------------
 SELECT Games.gameID AS `Game ID`,
     Games.title AS `Title`,
     Games.releaseYear AS `Release Year`,
-    Games.price AS `Price`,
+    CONCAT('$', Games.price) AS `Price`,
     Developers.name as `Developer`,
     Franchises.title as `Franchise`,
-    FROM Games
+    CASE
+        WHEN activeInventory = 1 THEN 'Yes'
+        WHEN activeInventory = 0 THEN 'No'
+    END AS `Active Inventory`
+FROM Games
     LEFT JOIN Developers ON Developers.developerID = Games.developerID
     LEFT JOIN Franchises ON Franchises.franchiseID = Games.franchiseID
 ORDER BY Games.gameID;
 -- -----------------------------------------------------
---!Insert a new game
+--Insert a new game
 -- -----------------------------------------------------
 INSERT INTO Games (
         title,
@@ -40,7 +44,7 @@ VALUES (
         :franchise
     );
 -- -----------------------------------------------------
--- !Update a game, given the id
+-- Update a game, given the id
 -- -----------------------------------------------------
 UPDATE Games
 SET title = :newGameTitle,
@@ -51,7 +55,7 @@ SET title = :newGameTitle,
     activeInventory = :newInventoryStatus
 WHERE gameID = :gameIDtoUpdate;
 -- -----------------------------------------------------
---!Delete a game
+--Delete a game
 -- -----------------------------------------------------
 DELETE FROM Games
 WHERE gameID = :gameIDToDelete;
@@ -61,25 +65,25 @@ WHERE gameID = :gameIDToDelete;
  
  */
 -- -----------------------------------------------------
--- !Get all the genres of games
+-- Get all the genres of games
 -- -----------------------------------------------------
 SELECT genreID,
     name as `Name`
 FROM Genres
 ORDER BY name;
 -- -----------------------------------------------------
---!Insert a new Genre
+--Insert a new Genre
 -- -----------------------------------------------------
 INSERT INTO Genres (name)
 VALUES (:genreName);
 -- -----------------------------------------------------
--- !Update a genre, given the id
+-- Update a genre, given the id
 -- -----------------------------------------------------
 UPDATE Genres
 SET name = :genreName
 WHERE genreID = :genreIDtoUpdate;
 -- -----------------------------------------------------
---!Delete a genre 
+--Delete a genre 
 -- -----------------------------------------------------
 DELETE FROM Genres
 WHERE genreID = :genreIDToDelete;
@@ -90,7 +94,7 @@ WHERE genreID = :genreIDToDelete;
  
  */
 -- -----------------------------------------------------
---!Get all the games and genre combinations
+--Get all the games and genre combinations
 -- -----------------------------------------------------
 SELECT GameHasGenres.gameHasGenreID,
     Games.title as `Game`,
@@ -100,12 +104,12 @@ SELECT GameHasGenres.gameHasGenreID,
     JOIN Genres ON Genres.genreID = GameHasGenres.genreID
 ORDER BY Games.title;
 -- -----------------------------------------------------
---!Add a new Game-Genre Relationship
+--Add a new Game-Genre Relationship
 -- -----------------------------------------------------
 INSERT INTO GameHasGenres (gameID, genreID)
 VALUES (:game, :genre,);
 -- -----------------------------------------------------
---!Update a Game-Genre relationship, given the id
+--Update a Game-Genre relationship, given the id
 -- -----------------------------------------------------
 UPDATE GameHasGenres
 SET gameHasGenreID = :gameHasGenreIDToUpdate,
@@ -113,7 +117,7 @@ SET gameHasGenreID = :gameHasGenreIDToUpdate,
     genreID = :genreID
 WHERE gameHasGenreID = :gameHasGenreIDToUpdate;
 -- -----------------------------------------------------
---!Delete a Game-Genre relationship
+--Delete a Game-Genre relationship
 -- -----------------------------------------------------
 DELETE FROM GameHasGenres
 WHERE gameHasGenreID = :gameHasGenresIDToDelete;
@@ -123,26 +127,26 @@ WHERE gameHasGenreID = :gameHasGenresIDToDelete;
  
  */
 -- -----------------------------------------------------
---!Get all the platforms
+--Get all the platforms
 -- -----------------------------------------------------
 SELECT platformID,
     name
 FROM Platforms
 ORDER BY name;
 -- -----------------------------------------------------
---!Add a new Platform
+--Add a new Platform
 -- -----------------------------------------------------
 INSERT INTO Platforms (name)
 VALUES (:platformName);
 -- -----------------------------------------------------
---!Update a Platform
+--Update a Platform
 -- -----------------------------------------------------
 UPDATE Platforms
 SET platformID = :idOfPlatformToUpdate,
     name = :newName
 WHERE platformID = :idOfPlatformToUpdate;
 -- -----------------------------------------------------
---!Delete a Platform 
+--Delete a Platform 
 -- -----------------------------------------------------
 DELETE FROM Platforms
 WHERE platformID = :platformIDToDelete;
@@ -152,7 +156,7 @@ WHERE platformID = :platformIDToDelete;
  
  */
 -- -----------------------------------------------------
---!Get all the Game-Platform relationships
+--Get all the Game-Platform relationships
 -- -----------------------------------------------------
 SELECT GameHasPlatforms.gameHasPlatformID,
     Games.title as `Game`,
@@ -162,12 +166,12 @@ FROM GameHasPlatforms
     JOIN Platforms ON Platforms.platformID = GameHasPlatforms.platformID
 ORDER BY Games.title;
 -- -----------------------------------------------------
---!Add a new Game-Platform relationship
+--Add a new Game-Platform relationship
 -- -----------------------------------------------------
 INSERT INTO GameHasPlatforms (gameID, platformID)
 VALUES (:idOfGameToAddPlatform, :idOfPlatformToAddToGame);
 -- -----------------------------------------------------
---!Update a Game-Platform relationship
+--Update a Game-Platform relationship
 -- -----------------------------------------------------
 UPDATE GameHasPlatforms
 SET gameHasPlatformID = :gameHasPlatformIDToUpdate,
@@ -175,7 +179,7 @@ SET gameHasPlatformID = :gameHasPlatformIDToUpdate,
     platformID = :newPlatformID
 WHERE gameHasPlatformID = :gameHasPlatformIDToUpdate;
 -- -----------------------------------------------------
---!Delete a Game-Platform relationship
+--Delete a Game-Platform relationship
 -- -----------------------------------------------------
 DELETE FROM GameHasPlatforms
 WHERE gameHasPlatformID = :gameHasPlatformIDToDelete;
@@ -185,14 +189,14 @@ WHERE gameHasPlatformID = :gameHasPlatformIDToDelete;
  
  */
 -- -----------------------------------------------------
---!Get all the orders
+--Get all the orders
 -- -----------------------------------------------------
 Select orderID,
     date AS `Date`,
     customerID AS `Customer ID`
 FROM Orders;
 -- -----------------------------------------------------
---!Update an order
+--Update an order
 -- -----------------------------------------------------
 UPDATE Orders
 SET orderID = :idOfOrderToUpdate,
@@ -200,7 +204,7 @@ SET orderID = :idOfOrderToUpdate,
     customerID = :idOfCustomerToUpdate
 WHERE orderID = :idOfOrderToUpdate;
 -- -----------------------------------------------------
---!Add a new order
+--Add a new order
 -- -----------------------------------------------------
 INSERT INTO Orders (date, customerID)
 VALUES (
@@ -208,7 +212,7 @@ VALUES (
         :idOfCustomerForOrder
     );
 -- -----------------------------------------------------
---!Delete an Order
+--Delete an Order
 -- -----------------------------------------------------
 DELETE FROM Orders
 WHERE orderID = :orderIDToDelete;
@@ -218,7 +222,7 @@ WHERE orderID = :orderIDToDelete;
  
  */
 -- -----------------------------------------------------
---!Get all the Game-Order relationships
+--Get all the Game-Order relationships
 -- -----------------------------------------------------
 SELECT GameHasOrders.gameHasOrderID,
     Games.title AS `Game`,
@@ -228,7 +232,7 @@ FROM GameHasOrders
     JOIN Orders ON Orders.orderID = GameHasOrders.orderID
 ORDER BY Games.title;
 -- -----------------------------------------------------
---!Add a new Game-Order relationship
+--Add a new Game-Order relationship
 -- -----------------------------------------------------
 INSERT INTO GameHasOrders (gameHasOrderID, gameID, orderID)
 VALUES (
@@ -237,7 +241,7 @@ VALUES (
         :idOfOrderWithGame
     );
 -- -----------------------------------------------------
---!update a Game-Order relationship
+--update a Game-Order relationship
 -- -----------------------------------------------------
 UPDATE GameHasOrders
 SET gameHasOrderID = :idOfGameOrder,
@@ -245,7 +249,7 @@ SET gameHasOrderID = :idOfGameOrder,
     platformID = :newPlatformID
 WHERE gameHasOrderID = :idOfGameOrder;
 -- -----------------------------------------------------
---!Delete a Game-Order relationship
+--Delete a Game-Order relationship
 -- -----------------------------------------------------
 DELETE FROM GameHasOrders
 WHERE gameHasOrderID = :gameHasOrderIDToDelete;
@@ -255,7 +259,7 @@ WHERE gameHasOrderID = :gameHasOrderIDToDelete;
  
  */
 -- -----------------------------------------------------
---!Get all of the customers
+--Get all of the customers
 -- -----------------------------------------------------
 SELECT customerID AS `Customer ID`,
     firstName AS `First Name`,
@@ -268,7 +272,7 @@ SELECT customerID AS `Customer ID`,
     END AS `Active Customer`
 FROM Customers;
 -- -----------------------------------------------------
---!Add a new customer
+--Add a new customer
 -- -----------------------------------------------------
 INSERT INTO Customers (
         firstName,
@@ -283,7 +287,7 @@ VALUES (
         :startingRewardPoints
     );
 -- -----------------------------------------------------
---!Update a customer
+--Update a customer
 -- -----------------------------------------------------
 UPDATE Customers
 SET customerID = :idOfCustomerToUpdate,
@@ -294,7 +298,7 @@ SET customerID = :idOfCustomerToUpdate,
     activeCustomer = :newActiveCustomerStatus
 WHERE customerID = :idOfCustomerToUpdate;
 -- -----------------------------------------------------
---!Delete a Customer
+--Delete a Customer
 -- -----------------------------------------------------
 DELETE FROM Customers
 WHERE customerID = :customerIDToDelete;
@@ -304,55 +308,55 @@ WHERE customerID = :customerIDToDelete;
  
  */
 -- -----------------------------------------------------
---!Get all of the franchises
+--Get all of the franchises
 -- -----------------------------------------------------
 SELECT franchiseID AS `Franchise ID`,
     title AS `Title`
 FROM Franchises
 ORDER BY title;
 -- -----------------------------------------------------
---!Add a new Franchise
+--Add a new Franchise
 -- -----------------------------------------------------
 INSERT INTO Franchises (title)
 VALUES (:titleOfFranchise);
 -- -----------------------------------------------------
---!Update a Franchise
+--Update a Franchise
 -- -----------------------------------------------------
 UPDATE Franchises
 SET franchiseID = :franchiseIDToUpdate,
     title = :newTitle
 WHERE franchiseID = :franchiseIDToUpdate;
 -- -----------------------------------------------------
---!Delete a Franchise
+--Delete a Franchise
 -- -----------------------------------------------------
 DELETE FROM Franchises
 WHERE franchiseID = :franchiseIDToDelete;
 /*
-
-Developers Queries
-
-*/
+ 
+ Developers Queries
+ 
+ */
 -- -----------------------------------------------------
---!Get all of the Developers
+--Get all of the Developers
 -- -----------------------------------------------------
 SELECT developerID AS `Developer ID`,
     name AS `Name`
 FROM Developers
 ORDER BY name;
 -- -----------------------------------------------------
---!Add a new Developer
+--Add a new Developer
 -- -----------------------------------------------------
 INSERT INTO Developers (name)
 VALUES (:nameOfDeveloper);
 -- -----------------------------------------------------
---!Update a Developer
+--Update a Developer
 -- -----------------------------------------------------
 UPDATE Developer
 SET developerID = :developerIDToUpdate,
     name = :newName
 WHERE developerID = :developerIDToUpdate;
 -- -----------------------------------------------------
---!Delete a Developer
+--Delete a Developer
 -- -----------------------------------------------------
 DELETE FROM Developers
 WHERE developerID = :developerIDToUpdate;
