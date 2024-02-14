@@ -18,10 +18,7 @@ SELECT Games.gameID AS `Game ID`,
     CONCAT('$', Games.price) AS `Price`,
     Developers.name as `Developer`,
     Franchises.title as `Franchise`,
-    CASE
-        WHEN activeInventory = 1 THEN 'Yes'
-        WHEN activeInventory = 0 THEN 'No'
-    END AS `Active Inventory`
+    Games.activeInventory AS `Active Inventory`
 FROM Games
     LEFT JOIN Developers ON Developers.developerID = Games.developerID
     LEFT JOIN Franchises ON Franchises.franchiseID = Games.franchiseID
@@ -266,10 +263,7 @@ SELECT customerID AS `Customer ID`,
     lastName AS `Last Name`,
     email AS `Email`,
     rewardPoints AS `Reward Points`,
-    CASE
-        WHEN activeCustomer = 1 THEN 'Yes'
-        WHEN activeCustomer = 0 THEN 'No'
-    END AS `Active Customer`
+    activeCustomer AS `Active Customer`
 FROM Customers;
 -- -----------------------------------------------------
 --Add a new customer
