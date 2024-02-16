@@ -29,8 +29,8 @@
   </nav>
   <p>&nbsp;</p>
   <h2>Genres Page</h2>
-
   <p>&nbsp;</p>
+
   <h3>Games:</h3>
   <table id="gamesList">
     <tr>
@@ -41,25 +41,26 @@
       <th>Developer</th>
       <th>Franchise</th>
       <th>Active Inventory</th>
+      <th>Action</th>
     </tr>
   </table>
 
-  <p>&nbsp;</p>
   <h3>Genres:</h3>
   <table id="genresList">
     <tr>
       <th>genreID</th>
       <th>name</th>
+      <th>Action</th>
     </tr>
   </table>
 
-  <p>&nbsp;</p>
   <h3>Game-Genre Relation:</h3>
   <table id="gameHasGenresList">
     <tr>
       <th>gameHasGenreID</th>
       <th>gameID</th>
       <th>genreID</th>
+      <th>Action</th>
     </tr>
   </table>
 
@@ -80,7 +81,6 @@
   </form>
 
   <!-- Input Text Box to Insert -->
-  <p>&nbsp;</p>
   <h3>Add New Genre</h3>
   <form id="addGenreForm">
     <input type="text" id="new-genre--genreName" placeholder="Genre Name" required />
@@ -128,7 +128,7 @@
 
   <!-- Update Game-Genre Relation Form -->
   <h3>Update Game-Genre Relation</h3>
- 
+
   <form id="updateGameGenreForm">
     <input type="text" id="update-game-genre--gameGenreID" placeholder="Game/Genre ID" required />
     <select id="update-game-genre--gameID">

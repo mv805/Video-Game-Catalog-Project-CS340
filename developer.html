@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Team 22</title>
-<style>
-  table, th, td, form {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Team 22</title>
+  <style>
+    table,
+    th,
+    td,
+    form {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <h1><strong>Game Quest: Video Game Store</strong></h1>
-</header>
-<nav class="global-nav">
+  <header>
+    <h1><strong>Game Quest: Video Game Store</strong></h1>
+  </header>
+  <nav class="global-nav">
     <a href="index.html">Inventory</a> |
-    <a href="genre.html">Genres</a> | 
-    <a href="platform.html">Platforms</a> | 
-    <a href="orders.html">Orders</a> | 
+    <a href="genre.html">Genres</a> |
+    <a href="platform.html">Platforms</a> |
+    <a href="orders.html">Orders</a> |
     <a href="customers.html">Customers</a> |
     <a href="franchise.html">Franchises</a> |
     <a href="developer.html">Developers</a>
   </nav>
-<p>&nbsp;</p>
-<h2>Developers Page</h2>
-
   <p>&nbsp;</p>
+  <h2>Developers Page</h2>
+  <p>&nbsp;</p>
+
+
   <h3>Games:</h3>
   <table id="gamesList">
     <tr>
@@ -38,33 +44,37 @@
       <th>Developer</th>
       <th>Franchise</th>
       <th>Active Inventory</th>
+      <th>Action</th>
     </tr>
   </table>
 
-  <p>&nbsp;</p>
+
   <h3>Developers:</h3>
   <table id="developersList">
     <tr>
       <th>Developer ID</th>
       <th>Name</th>
+      <th>Action</th>
     </tr>
   </table>
 
+  <!-- Input text box to Insert -->
   <h3>Add New Game</h3>
   <form id="addGameForm">
     <input type="text" id="gameTitle" placeholder="Title" required>
     <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
     <input type="text" id="gamePrice" placeholder="Price" required>
-      <select id="franchiseID">
-        <option value="--franchise--"> --Select Franchise--</option>
-      </select>
-      <select id="developerID">
-        <option value="--developer--">--Select Developer--</option>
-      </select>
+    <select id="franchiseID">
+      <option value="--franchise--"> --Select Franchise--</option>
+    </select>
+    <select id="developerID">
+      <option value="--developer--">--Select Developer--</option>
+    </select>
     <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
     <button type="submit">Add Game</button>
   </form>
 
+  <!-- Update Game Form -->
   <h3>Update Game</h3>
   <form id="updateGameForm">
     <input type="text" id="updateGameID" placeholder="Game ID" required>
@@ -81,12 +91,14 @@
     <button type="submit">Update Game</button>
   </form>
 
+  <!-- Input text box to Insert -->
   <h3>Add New Developer</h3>
   <form id="addDeveloperForm">
     <input type="text" id="developerName" placeholder="Developer Name" required>
     <button type="submit">Add Developer</button>
   </form>
-  
+
+  <!-- Update Developer Form -->
   <h3>Update Developer</h3>
   <form id="updateDeveloperForm">
     <input type="text" id="updateDeveloperID" placeholder="Developer ID" required>
@@ -96,9 +108,9 @@
 
   <script>
     const games = [
-      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Retro Studios", franchise: "Metroid", activeInventory: "1"},
-      { gameID: "2", title: "Call of Duty", releaseYear: "2003", price: "$59.99", developer: "Activision", franchise: "Call of Duty", activeInventory: "1"  },
-      { gameID: "3", title: "Assassin's Creed", releaseYear: "2007", price: "$59.99", developer: "Ubisoft", franchise: "Assassin's Creed", activeInventory: "1"}
+      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Retro Studios", franchise: "Metroid", activeInventory: "1" },
+      { gameID: "2", title: "Call of Duty", releaseYear: "2003", price: "$59.99", developer: "Activision", franchise: "Call of Duty", activeInventory: "1" },
+      { gameID: "3", title: "Assassin's Creed", releaseYear: "2007", price: "$59.99", developer: "Ubisoft", franchise: "Assassin's Creed", activeInventory: "1" }
     ];
 
     const developers = [
@@ -117,8 +129,8 @@
         <th>Price</th>
         <th>Developer</th>
         <th>Franchise</th>
-        <th>Action</th>
         <th>Active Inventory</th>
+        <th>Action</th>
       </tr>`;
 
       const developersBody = document.querySelector("#developersList");
@@ -164,4 +176,5 @@
   </script>
 
 </body>
+
 </html>

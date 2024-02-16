@@ -161,12 +161,12 @@ COMMIT;
 -- Data for table Games
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Games (gameID, title, releaseYear, price, developerID, franchiseID) VALUES 
-(1, 'Super Mario World', '1990', 10.00, 5, 4),
-(2, 'Grand Theft Auto', '1997', 10.00, 6, 3),
-(3, 'Stardew Valley', '2016', 39.99, 7, NULL),
-(4, 'Tennis For Two', '1958', 500.00, NULL, NULL),
-(5, 'Super Mario RPG', '2023', 59.99, 5, 4);
+INSERT INTO Games (gameID, title, releaseYear, price, developerID, franchiseID, activeInventory) VALUES 
+(1, 'Super Mario World', '1990', 10.00, 5, 4, 1),
+(2, 'Grand Theft Auto', '1997', 10.00, 6, 3, 1),
+(3, 'Stardew Valley', '2016', 39.99, 7, NULL, 1),
+(4, 'Tennis For Two', '1958', 500.00, NULL, NULL, 1),
+(5, 'Super Mario RPG', '2023', 59.99, 5, 4, 1);
 COMMIT;
 
 -- -----------------------------------------------------
@@ -189,10 +189,10 @@ COMMIT;
 -- Data for table Customers
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Customers (customerID, firstName, lastName, email, rewardPoints) VALUES 
-(1, 'Jackie', 'Harell', 'jh@amazon.com', 58),
-(2, 'Nigel', 'Thornberry', 'nicktoons@yahoo.com', 12),
-(3, 'Patrick', 'Bateman', 'pbateman@pp.com', 17);
+INSERT INTO Customers (customerID, firstName, lastName, email, rewardPoints, activeCustomer) VALUES 
+(1, 'Jackie', 'Harell', 'jh@amazon.com', 58, 1),
+(2, 'Nigel', 'Thornberry', 'nicktoons@yahoo.com', 12, 1),
+(3, 'Patrick', 'Bateman', 'pbateman@pp.com', 17, 1);
 COMMIT;
 
 -- -----------------------------------------------------
