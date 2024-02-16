@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Team 22</title>
-<style>
-  table, th, td, form {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Team 22</title>
+  <style>
+    table,
+    th,
+    td,
+    form {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <h1><strong>Game Quest: Video Game Store</strong></h1>
-</header>
-<!-- Links to pages -->
-<nav class="global-nav">
+  <header>
+    <h1><strong>Game Quest: Video Game Store</strong></h1>
+  </header>
+  <!-- Links to pages -->
+  <nav class="global-nav">
     <a href="index.html">Inventory</a> |
-    <a href="genre.html">Genres</a> | 
-    <a href="platform.html">Platforms</a> | 
-    <a href="orders.html">Orders</a> | 
+    <a href="genre.html">Genres</a> |
+    <a href="platform.html">Platforms</a> |
+    <a href="orders.html">Orders</a> |
     <a href="customers.html">Customers</a> |
     <a href="franchise.html">Franchises</a> |
     <a href="developer.html">Developers</a>
   </nav>
-<p>&nbsp;</p>
-<h2>Franchises Page</h2>
-
   <p>&nbsp;</p>
+  <h2>Franchises Page</h2>
+  <p>&nbsp;</p>
+
   <h3>Games:</h3>
   <table id="gamesList">
     <tr>
@@ -39,73 +44,74 @@
       <th>Developer</th>
       <th>Franchise</th>
       <th>Active Inventory</th>
+      <th>Action</th>
     </tr>
   </table>
 
-  <p>&nbsp;</p>
   <h3>Franchises:</h3>
   <table id="franchisesList">
     <tr>
       <th>Franchise ID</th>
       <th>Title</th>
+      <th>Action</th>
     </tr>
   </table>
 
   <!-- Add New Game Form -->
-<h3>Add New Game</h3>
-<form id="addGameForm">
-  <input type="text" id="gameTitle" placeholder="Title" required>
-  <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
-  <input type="text" id="gamePrice" placeholder="Price" required>
-  <select id="gameDeveloper">
-    <option value="--developer--">--Select Developer--</option>
-  </select>
-  <select id="gameFranchise">
-    <option value="--franchise--">--Select Franchise--</option>
-  </select>
-  <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
-  <button type="submit">Add Game</button>
-</form>
+  <h3>Add New Game</h3>
+  <form id="addGameForm">
+    <input type="text" id="gameTitle" placeholder="Title" required>
+    <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
+    <input type="text" id="gamePrice" placeholder="Price" required>
+    <select id="gameDeveloper">
+      <option value="--developer--">--Select Developer--</option>
+    </select>
+    <select id="gameFranchise">
+      <option value="--franchise--">--Select Franchise--</option>
+    </select>
+    <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
+    <button type="submit">Add Game</button>
+  </form>
 
-<!-- Update Game Form -->
-<h3>Update Game</h3>
-<form id="updateGameForm">
-  <input type="text" id="updateGameID" placeholder="Game ID" required>
-  <input type="text" id="updateGameTitle" placeholder="New Title" required>
-  <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
-  <input type="text" id="updateGamePrice" placeholder="New Price" required>
-  <select id="updateGameDeveloper">
-    <option value="--developer--">--Select Developer--</option>
-  </select>
-  <select id="updateGameFranchise">
-    <option value="--franchise--">--Select Franchise--</option>
-  </select>
-  <input type="number" id="updateActiveInventory" placeholder="Update Active Inventory Status" required>
-  <button type="submit">Update Game</button>
-</form>
+  <!-- Update Game Form -->
+  <h3>Update Game</h3>
+  <form id="updateGameForm">
+    <input type="text" id="updateGameID" placeholder="Game ID" required>
+    <input type="text" id="updateGameTitle" placeholder="New Title" required>
+    <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
+    <input type="text" id="updateGamePrice" placeholder="New Price" required>
+    <select id="updateGameDeveloper">
+      <option value="--developer--">--Select Developer--</option>
+    </select>
+    <select id="updateGameFranchise">
+      <option value="--franchise--">--Select Franchise--</option>
+    </select>
+    <input type="number" id="updateActiveInventory" placeholder="Update Active Inventory Status" required>
+    <button type="submit">Update Game</button>
+  </form>
 
-<!-- Add New Franchise Form -->
-<h3>Add New Franchise</h3>
-<form id="addFranchiseForm">
-  <input type="text" id="franchiseTitle" placeholder="Franchise Title" required>
-  <button type="submit">Add Franchise</button>
-</form>
+  <!-- Add New Franchise Form -->
+  <h3>Add New Franchise</h3>
+  <form id="addFranchiseForm">
+    <input type="text" id="franchiseTitle" placeholder="Franchise Title" required>
+    <button type="submit">Add Franchise</button>
+  </form>
 
-<!-- Update Franchise Form -->
-<h3>Update Franchise</h3>
-<form id="updateFranchiseForm">
-  <input type="text" id="updateFranchiseID" placeholder="Franchise ID" required>
-  <input type="text" id="updateFranchiseTitle" placeholder="New Franchise Title" required>
-  <button type="submit">Update Franchise</button>
-</form>
+  <!-- Update Franchise Form -->
+  <h3>Update Franchise</h3>
+  <form id="updateFranchiseForm">
+    <input type="text" id="updateFranchiseID" placeholder="Franchise ID" required>
+    <input type="text" id="updateFranchiseTitle" placeholder="New Franchise Title" required>
+    <button type="submit">Update Franchise</button>
+  </form>
 
   <script>
     const games = [
       { gameID: "1", title: "Metroid Prime", releaseYear: "2002", price: "$59.99", developer: "Retro Studios", franchise: "Metroid", activeInventory: "1" },
       { gameID: "2", title: "Super Mario Odyssey", releaseYear: "2017", price: "$59.99", developer: "Nintendo", franchise: "Super Mario", activeInventory: "1" },
-      { gameID: "3", title: "F-ZERO GX", releaseYear: "2003", price: "$49.99", developer: "Amusement Vision", franchise: "F-ZERO", activeInventory: "1"  },
-      { gameID: "4", title: "Halo 3", releaseYear: "2007", price: "$59.99", developer: "Bungie", franchise: "Halo", activeInventory: "1"  },
-      { gameID: "5", title: "Doom Eternal", releaseYear: "2020", price: "$59.99", developer: "id Software", franchise: "Doom", activeInventory: "1"  }
+      { gameID: "3", title: "F-ZERO GX", releaseYear: "2003", price: "$49.99", developer: "Amusement Vision", franchise: "F-ZERO", activeInventory: "1" },
+      { gameID: "4", title: "Halo 3", releaseYear: "2007", price: "$59.99", developer: "Bungie", franchise: "Halo", activeInventory: "1" },
+      { gameID: "5", title: "Doom Eternal", releaseYear: "2020", price: "$59.99", developer: "id Software", franchise: "Doom", activeInventory: "1" }
     ];
 
     const franchises = [
@@ -172,4 +178,5 @@
   </script>
 
 </body>
+
 </html>
