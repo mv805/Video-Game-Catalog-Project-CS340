@@ -31,7 +31,8 @@ INSERT INTO Games (
         releaseYear,
         price,
         developerID,
-        franchiseID
+        franchiseID,
+        activeInventory
     )
 VALUES (
         :gameTitle,
@@ -39,6 +40,7 @@ VALUES (
         :price,
         :developer,
         :franchise
+        :activeInventory
     );
 -- -----------------------------------------------------
 -- Update a game, given the id
@@ -87,7 +89,7 @@ WHERE genreID = :genreIDToDelete;
 --
 /* 
  
- Games-Genres queries
+ Games-Genres queries /////////////////////////////////////////////////////////////////// Junction Table
  
  */
 -- -----------------------------------------------------
@@ -104,7 +106,10 @@ ORDER BY Games.title;
 --Add a new Game-Genre Relationship
 -- -----------------------------------------------------
 INSERT INTO GameHasGenres (gameID, genreID)
-VALUES (:game, :genre,);
+VALUES (
+    :gameID,
+     :genreID
+     );
 -- -----------------------------------------------------
 --Update a Game-Genre relationship, given the id
 -- -----------------------------------------------------
@@ -149,7 +154,7 @@ DELETE FROM Platforms
 WHERE platformID = :platformIDToDelete;
 /*
  
- Game-Platform queries
+ Games-Platforms queries /////////////////////////////////////////////////////////////////// Junction Table
  
  */
 -- -----------------------------------------------------
@@ -166,7 +171,10 @@ ORDER BY Games.title;
 --Add a new Game-Platform relationship
 -- -----------------------------------------------------
 INSERT INTO GameHasPlatforms (gameID, platformID)
-VALUES (:idOfGameToAddPlatform, :idOfPlatformToAddToGame);
+VALUES (
+    :gameID,
+    :platformID
+    );
 -- -----------------------------------------------------
 --Update a Game-Platform relationship
 -- -----------------------------------------------------
@@ -215,7 +223,7 @@ DELETE FROM Orders
 WHERE orderID = :orderIDToDelete;
 /*
  
- Game-Order queries
+ Games-Orders queries /////////////////////////////////////////////////////////////////// Junction Table
  
  */
 -- -----------------------------------------------------
@@ -231,11 +239,10 @@ ORDER BY Games.title;
 -- -----------------------------------------------------
 --Add a new Game-Order relationship
 -- -----------------------------------------------------
-INSERT INTO GameHasOrders (gameHasOrderID, gameID, orderID)
+INSERT INTO GameHasOrders (gameID, orderID)
 VALUES (
-        :idOfGameOrder,
-        :idOfGameOnOrder,
-        :idOfOrderWithGame
+    :gameID,
+    :orderID
     );
 -- -----------------------------------------------------
 --update a Game-Order relationship
@@ -272,13 +279,15 @@ INSERT INTO Customers (
         firstName,
         lastName,
         email,
-        rewardPoints
+        rewardPoints,
+        activeCustomer
     )
 VALUES (
         :firstName,
         :lastName,
         :email,
         :startingRewardPoints
+        :activeCustomer
     );
 -- -----------------------------------------------------
 --Update a customer
