@@ -1,0 +1,42 @@
+<!-- A table template for displaying any query data. Need to supply the data fully sorted and formatted etc. This will just display it. The row headers should also be formatted since it will pull it from the object keys. see the example data below for what should be sent to this template
+
+    In this example, the titles are the keys in each object, and data comes formatted.
+[
+    {
+        'Game ID': 1,
+        'Title': 'Super Mario Bros.',
+        'Release Year': 1985,
+        'Price': '$30',
+        'Developer': 'Nintendo',
+        'Franchise': 'Super Mario'
+    },
+    {
+        'Game ID': 2,
+        'Title': 'The Legend of Zelda',
+        'Release Year': 1986,
+        'Price': '$25',
+        'Developer': 'Nintendo',
+        'Franchise': 'The Legend of Zelda'
+    },
+    ...More rows...
+] 
+-->
+<table>
+  <thead>
+    <tr>
+      <!-- iterate through the first row arbitrarily, just to get the header titles -->
+      <% Object.keys(data[0]).forEach(function(rowTitle) { %>
+      <th><%= rowTitle %></th>
+      <% }); %>
+    </tr>
+  </thead>
+  <tbody>
+    <% data.forEach(function(row) { %>
+    <tr>
+      <% Object.keys(row).forEach(function(value) { %>
+      <td><%= row[value] %></td>
+      <% }); %>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>

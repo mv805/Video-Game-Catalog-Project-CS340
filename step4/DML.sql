@@ -12,12 +12,12 @@
 -- -----------------------------------------------------
 -- Read Game
 -- -----------------------------------------------------
-SELECT Games.gameID AS `Game ID`,
-    Games.title AS `Title`,
-    Games.releaseYear AS `Release Year`,
-    CONCAT('$', Games.price) AS `Price`,
-    Developers.name as `Developer`,
-    Franchises.title as `Franchise`,
+SELECT Games.gameID AS 'Game ID',
+    Games.title AS 'Title',
+    Games.releaseYear AS 'Release Year',
+    CONCAT('$', Games.price) AS 'Price',
+    IFNULL(Developers.name, 'N/A') as 'Developer',
+    IFNULL(Franchises.title, 'N/A') as 'Franchise'
 FROM Games
     LEFT JOIN Developers ON Developers.developerID = Games.developerID
     LEFT JOIN Franchises ON Franchises.franchiseID = Games.franchiseID
@@ -48,13 +48,12 @@ SET title = :newGameTitle,
     price = :newPrice,
     developerID = :newDeveloper,
     franchiseID = :newFranchise,
-WHERE gameID = :gameIDtoUpdate;
+    WHERE gameID = :gameIDtoUpdate;
 -- -----------------------------------------------------
 --Delete Game
 -- -----------------------------------------------------
 DELETE FROM Games
 WHERE gameID = :gameIDToDelete;
-
 /* 
  
  Platforms page queries
@@ -103,10 +102,7 @@ ORDER BY Games.title;
 --Create Game-Platform 
 -- -----------------------------------------------------
 INSERT INTO GameHasPlatforms (gameID, platformID)
-VALUES (
-    :gameID,
-    :platformID
-    );
+VALUES (:gameID, :platformID);
 -- -----------------------------------------------------
 --Update Game-Platform 
 -- -----------------------------------------------------

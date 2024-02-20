@@ -100,12 +100,12 @@ COMMIT;
 -- Data for table Games
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO Games (gameID, title, releaseYear, price, developerID, franchiseID, activeInventory) VALUES 
-(1, 'Super Mario World', '1990', 10.00, 5, 4, 1),
-(2, 'Grand Theft Auto', '1997', 10.00, 6, 3, 1),
-(3, 'Stardew Valley', '2016', 39.99, 7, NULL, 1),
-(4, 'Tennis For Two', '1958', 500.00, NULL, NULL, 1),
-(5, 'Super Mario RPG', '2023', 59.99, 5, 4, 1);
+INSERT INTO Games (gameID, title, releaseYear, price, developerID, franchiseID) VALUES 
+(1, 'Super Mario World', '1990', 10.00, 5, 4),
+(2, 'Grand Theft Auto', '1997', 10.00, 6, 3),
+(3, 'Stardew Valley', '2016', 39.99, 7, NULL),
+(4, 'Tennis For Two', '1958', 500.00, NULL, NULL),
+(5, 'Super Mario RPG', '2023', 59.99, 5, 4);
 COMMIT;
 
 -- -----------------------------------------------------
@@ -139,4 +139,3 @@ INSERT INTO GameHasPlatforms (gameHasPlatformID, gameID, platformID) VALUES
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
-COMMIT;
