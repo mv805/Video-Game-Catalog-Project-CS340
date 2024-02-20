@@ -21,11 +21,8 @@
     <h1><strong>Game Quest: Video Game Store</strong></h1>
   </header>
   <nav class="global-nav">
-    <a href="index.html">Inventory</a> |
-    <a href="genre.html">Genres</a> |
+    <a href="index.html">Games</a> |
     <a href="platform.html">Platforms</a> |
-    <a href="orders.html">Orders</a> |
-    <a href="customers.html">Customers</a> |
     <a href="franchise.html">Franchises</a> |
     <a href="developer.html">Developers</a>
   </nav>
@@ -42,7 +39,6 @@
       <th>Price</th>
       <th>Developer</th>
       <th>Franchise</th>
-      <th>Active Inventory</th>
       <th>Action</th>
     </tr>
   </table>
@@ -67,30 +63,32 @@
   </table>
 
   <!-- Input Text Box to Insert -->
-  <h3>Add New Game</h3>
+  <h3>Add New Game:</h3>
   <form id="addGameForm">
     <input type="text" id="gameTitle" placeholder="Title" required>
     <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
     <input type="text" id="gamePrice" placeholder="Price" required>
+
     <select id="gameDeveloper">
       <option value="--developer--">--Select Developer--</option>
     </select>
+
     <select id="gameFranchise">
       <option value="--franchise--">--Select Franchise--</option>
     </select>
-    <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
+
     <button type="submit">Add Game</button>
   </form>
 
   <!-- Input Text Box to Insert -->
-  <h3>Add New Platform</h3>
+  <h3>Add New Platform:</h3>
   <form id="addPlatformForm">
     <input type="text" id="platformName" placeholder="Platform Name" required>
     <button type="submit">Add Platform</button>
   </form>
 
   <!-- Input Text Box to Insert -->
-  <h3>Add New Game-Platform Relation</h3>
+  <h3>Add New Game-Platform Relation:</h3>
   <form id="addGamePlatformForm">
     <select id="game">
       <option value="--game--"> --Select Game--</option>
@@ -102,70 +100,140 @@
   </form>
 
   <!-- Update Game Form -->
-  <h3>Update Game</h3>
+  <h3>Update Game:</h3>
   <form id="updateGameForm">
     <input type="text" id="updateGameID" placeholder="Game ID" required>
     <input type="text" id="updateGameTitle" placeholder="New Title" required>
     <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
     <input type="text" id="updateGamePrice" placeholder="New Price" required>
+
     <select id="updateGameDeveloper">
       <option value="--developer--">--Select Developer--</option>
     </select>
+
     <select id="updateGameFranchise">
       <option value="--franchise--">--Select Franchise--</option>
     </select>
-    <input type="number" id="updateActiveInventory" placeholder="Update Active Inventory Status" required>
+
     <button type="submit">Update Game</button>
   </form>
 
   <!-- Update Platform Form -->
-  <h3>Update Platform</h3>
+  <h3>Update Platform:</h3>
   <form id="updatePlatformForm">
-    <input type="text" id="update PlatformID" placeholder="Platform ID" required>
+    <input type="text" id="updatePlatformID" placeholder="Platform ID" required>
     <input type="text" id="updatePlatformName" placeholder="New Platform Name" required>
     <button type="submit">Update Platform</button>
   </form>
 
   <!-- Update Game-Platform Relation Form -->
-  <h3>Update Game-Platform Relation</h3>
+  <h3>Update Game-Platform Relation:</h3>
   <form id="updateGamePlatformForm">
     <input type="text" id="updateGamePlatform" placeholder="Game/Platform ID" required>
+
     <select id="game">
       <option value="--game--"> --Select Game--</option>
     </select>
+
     <select id="platform">
       <option value="--platform--">--Select Platform--</option>
     </select>
+
     <button type="submit">Update Relation</button>
   </form>
 
   <script>
     // Sample data 
     const games = [
-      // Populate games data here
-      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
-      { gameID: "2", title: "Metroid II: Return of Samus", releaseYear: "1991", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
-      { gameID: "3", title: "Super Metroid", releaseYear: "1994", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
-      { gameID: "4", title: "Metroid Fusion", releaseYear: "2002", price: "$59.99", developer: "Nintendo", franchise: "Metroid", activeInventory: "1" },
-      { gameID: "5", title: "Metroid Dread", releaseYear: "2021", price: "$59.99", developer: "Nintendo & MercurySteam", franchise: "Metroid", activeInventory: "1" }
+      { 
+        gameID: "1", 
+        title: "Metroid Prime", 
+        releaseYear: "2002", 
+        price: "$59.99", 
+        developer: "Retro Studios", 
+        franchise: "Metroid" 
+      },
+      { 
+        gameID: "2", 
+        title: "Super Mario Odyssey", 
+        releaseYear: "2017", 
+        price: "$59.99", 
+        developer: "Nintendo", 
+        franchise: "Super Mario"
+      },
+      { 
+        gameID: "3", 
+        title: "F-ZERO GX", 
+        releaseYear: "2003", 
+        price: "$49.99", 
+        developer: "Amusement Vision", 
+        franchise: "F-ZERO" 
+      },
+      { 
+        gameID: "4",
+        title: "Halo 3", 
+        releaseYear: "2007", 
+        price: "$59.99", 
+        developer: "Bungie", 
+        franchise: "Halo"
+      },
+      { 
+        gameID: "5", 
+        title: "Doom Eternal", 
+        releaseYear: "2020", 
+        price: "$59.99", 
+        developer: "id Software", 
+        franchise: "Doom" 
+      }
     ];
 
     const gameHasPlatforms = [
-      { gameHasPlatformID: "1", game: "Metroid", platform: "Nintendo" },
-      { gameHasPlatformID: "2", game: "Metroid II: Return of Samus", platform: "Nintendo" },
-      { gameHasPlatformID: "3", game: "Super Metroid", platform: "Nintendo" },
-      { gameHasPlatformID: "4", game: "Metroid Fusion", platform: "Nintendo" },
-      { gameHasPlatformID: "5", game: "Metroid Dread", platform: "Nintendo" }
+      { 
+        gameHasPlatformID: "1", 
+        game: "Metroid Prime", 
+        platform: "Nintendo" 
+      },
+      { 
+        gameHasPlatformID: "2", 
+        game: "Super Mario Odyssey", 
+        platform: "Nintendo" 
+      },
+      { 
+        gameHasPlatformID: "3", 
+        game: "F ZERO GX", 
+        platform: "Nintendo" 
+      },
+      { 
+        gameHasPlatformID: "4", 
+        game: "Halo 3", 
+        platform: "XBox" 
+      },
+      { 
+        gameHasPlatformID: "5", 
+        game: "Doom Eternal", 
+        platform: "Playstation" 
+      }
     ];
 
 
     const platforms = [
       // Populate games data here
-      { platformID: "1", name: "Nintendo" },
-      { platformID: "2", name: "Xbox" },
-      { platformID: "3", name: "Playstation" },
-      { platformID: "4", name: "PC" }
-
+      { 
+        platformID: "1", 
+        name: "Nintendo" 
+      },
+      { 
+        platformID: "2", 
+        name: "Xbox" 
+      },
+      { 
+        platformID: "3", 
+        name: "Playstation" 
+      },
+      { 
+        platformID: "4", 
+        name: "PC" 
+      }
     ];
 
     function renderTables() {
@@ -179,7 +247,6 @@
       <th>Price</th>
       <th>Developer</th>
       <th>Franchise</th>
-      <th>Active Inventory</th>
       <th>Action</th>
     </tr>
   `;
@@ -213,7 +280,6 @@
       <td>${game.price}</td>
       <td>${game.developer}</td>
       <td>${game.franchise}</td>
-      <td>${game.activeInventory}</td>
       <td>
         <button type="button">Update</button>
         <button type="button">Delete</button>
