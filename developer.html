@@ -21,11 +21,8 @@
     <h1><strong>Game Quest: Video Game Store</strong></h1>
   </header>
   <nav class="global-nav">
-    <a href="index.html">Inventory</a> |
-    <a href="genre.html">Genres</a> |
+    <a href="index.html">Games</a> |
     <a href="platform.html">Platforms</a> |
-    <a href="orders.html">Orders</a> |
-    <a href="customers.html">Customers</a> |
     <a href="franchise.html">Franchises</a> |
     <a href="developer.html">Developers</a>
   </nav>
@@ -43,11 +40,9 @@
       <th>Price</th>
       <th>Developer</th>
       <th>Franchise</th>
-      <th>Active Inventory</th>
       <th>Action</th>
     </tr>
   </table>
-
 
   <h3>Developers:</h3>
   <table id="developersList">
@@ -59,47 +54,51 @@
   </table>
 
   <!-- Input text box to Insert -->
-  <h3>Add New Game</h3>
+  <h3>Add New Game:</h3>
   <form id="addGameForm">
     <input type="text" id="gameTitle" placeholder="Title" required>
     <input type="number" id="gameReleaseYear" placeholder="Release Year" required>
     <input type="text" id="gamePrice" placeholder="Price" required>
+
     <select id="franchiseID">
       <option value="--franchise--"> --Select Franchise--</option>
     </select>
+
     <select id="developerID">
       <option value="--developer--">--Select Developer--</option>
     </select>
-    <input type="number" id="activeInventory" placeholder="Active Inventory Status" required>
+
     <button type="submit">Add Game</button>
   </form>
 
   <!-- Update Game Form -->
-  <h3>Update Game</h3>
+  <h3>Update Game:</h3>
   <form id="updateGameForm">
     <input type="text" id="updateGameID" placeholder="Game ID" required>
     <input type="text" id="updateGameTitle" placeholder="New Title" required>
     <input type="number" id="updateGameReleaseYear" placeholder="New Release Year" required>
     <input type="text" id="updateGamePrice" placeholder="New Price" required>
+
     <select id="franchiseID">
       <option value="--franchise--"> --Select Franchise--</option>
     </select>
+
     <select id="developerID">
       <option value="--developer--">--Select Developer--</option>
     </select>
-    <input type="number" id="updateActiveInventory" placeholder="Update Active Inventory Status" required>
+
     <button type="submit">Update Game</button>
   </form>
 
   <!-- Input text box to Insert -->
-  <h3>Add New Developer</h3>
+  <h3>Add New Developer:</h3>
   <form id="addDeveloperForm">
     <input type="text" id="developerName" placeholder="Developer Name" required>
     <button type="submit">Add Developer</button>
   </form>
 
   <!-- Update Developer Form -->
-  <h3>Update Developer</h3>
+  <h3>Update Developer:</h3>
   <form id="updateDeveloperForm">
     <input type="text" id="updateDeveloperID" placeholder="Developer ID" required>
     <input type="text" id="updateDeveloperName" placeholder="New Developer Name" required>
@@ -108,15 +107,69 @@
 
   <script>
     const games = [
-      { gameID: "1", title: "Metroid", releaseYear: "1986", price: "$59.99", developer: "Retro Studios", franchise: "Metroid", activeInventory: "1" },
-      { gameID: "2", title: "Call of Duty", releaseYear: "2003", price: "$59.99", developer: "Activision", franchise: "Call of Duty", activeInventory: "1" },
-      { gameID: "3", title: "Assassin's Creed", releaseYear: "2007", price: "$59.99", developer: "Ubisoft", franchise: "Assassin's Creed", activeInventory: "1" }
+      { 
+        gameID: "1", 
+        title: "Metroid Prime", 
+        releaseYear: "2002", 
+        price: "$59.99", 
+        developer: "Retro Studios", 
+        franchise: "Metroid" 
+      },
+      { 
+        gameID: "2", 
+        title: "Super Mario Odyssey", 
+        releaseYear: "2017", 
+        price: "$59.99", 
+        developer: "Nintendo", 
+        franchise: "Super Mario"
+      },
+      { 
+        gameID: "3", 
+        title: "F-ZERO GX", 
+        releaseYear: "2003", 
+        price: "$49.99", 
+        developer: "Amusement Vision", 
+        franchise: "F-ZERO" 
+      },
+      { 
+        gameID: "4",
+        title: "Halo 3", 
+        releaseYear: "2007", 
+        price: "$59.99", 
+        developer: "Bungie", 
+        franchise: "Halo"
+      },
+      { 
+        gameID: "5", 
+        title: "Doom Eternal", 
+        releaseYear: "2020", 
+        price: "$59.99", 
+        developer: "id Software", 
+        franchise: "Doom" 
+      }
     ];
 
     const developers = [
-      { developerID: "1", name: "Retro Studios" },
-      { developerID: "2", name: "Activision" },
-      { developerID: "3", name: "Ubisoft" }
+      { 
+        developerID: "1", 
+        name: "Retro Studios" 
+      },
+      { 
+        developerID: "2", 
+        name: "Nintendo" 
+      },
+      { 
+        developerID: "3", 
+        name: "Amusement Vision" 
+      },
+      { 
+        developerID: "2", 
+        name: "Bungie" 
+      },
+      { 
+        developerID: "3", 
+        name: "id Software" 
+      }
     ];
 
     function renderTables() {
@@ -129,7 +182,6 @@
         <th>Price</th>
         <th>Developer</th>
         <th>Franchise</th>
-        <th>Active Inventory</th>
         <th>Action</th>
       </tr>`;
 
@@ -150,7 +202,6 @@
         <td>${game.price}</td>
         <td>${game.developer}</td>
         <td>${game.franchise}</td>
-        <td>${game.activeInventory}</td>
         <td>
           <button type="button">Update</button>
           <button type="button">Delete</button>

@@ -1,5 +1,5 @@
 /*
-DDL and DML for teh 'Game Quest' Video game store database system
+DDL and DML for teh 'Game Quest' Video game catalog database system
 
 by Jovanny Gochez and Matt Villa
 
@@ -37,46 +37,11 @@ CREATE TABLE IF NOT EXISTS Games (
     price DECIMAL(19, 2) NOT NULL,
     developerID INT NULL,
     franchiseID INT NULL,
-    activeInventory TINYINT DEFAULT 1,
     PRIMARY KEY (gameID),
     UNIQUE (title, releaseYear),
     -- The developer and franchise are not critical info, so if those entries are deleted from the other tables, it will simply be set to null here.
     FOREIGN KEY (developerID) REFERENCES Developers(developerID) ON DELETE SET NULL,
     FOREIGN KEY (franchiseID) REFERENCES Franchises(franchiseID) ON DELETE SET NULL
-);
--- -----------------------------------------------------
--- Table Genres
--- -----------------------------------------------------
-DROP TABLE IF EXISTS Genres;
-CREATE TABLE IF NOT EXISTS Genres (
-    genreID INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(45) NOT NULL UNIQUE,
-    PRIMARY KEY (genreID)
-);
--- -----------------------------------------------------
--- Table Customers
--- -----------------------------------------------------
-DROP TABLE IF EXISTS Customers;
-CREATE TABLE IF NOT EXISTS Customers (
-    customerID INT NOT NULL AUTO_INCREMENT,
-    firstName VARCHAR(45) NULL,
-    lastName VARCHAR(45) NULL,
-    email VARCHAR(45) NOT NULL UNIQUE,
-    rewardPoints INT NOT NULL DEFAULT 0,
-    activeCustomer TINYINT NOT NULL DEFAULT 1,
-    PRIMARY KEY (customerID)
-);
--- -----------------------------------------------------
--- Table Orders
--- -----------------------------------------------------
-DROP TABLE IF EXISTS Orders;
-CREATE TABLE IF NOT EXISTS Orders (
-    orderID INT NOT NULL AUTO_INCREMENT,
-    date DATETIME NOT NULL,
-    customerID INT NULL,
-    PRIMARY KEY (orderID),
-    -- From the application, the customers will only be able to be deleted if its not associated with an order, but if its not then it can be deleted. The entire order should not be deleted if a customer is deleted administratively, so the entry will just be set to null in that case.
-    FOREIGN KEY (customerID) REFERENCES Customers(customerID) ON DELETE SET NULL
 );
 -- -----------------------------------------------------
 -- Table Platforms
@@ -87,19 +52,7 @@ CREATE TABLE IF NOT EXISTS Platforms (
     name VARCHAR(45) NOT NULL UNIQUE,
     PRIMARY KEY (platformID)
 );
--- -----------------------------------------------------
--- Table GameHasOrders
--- -----------------------------------------------------
-DROP TABLE IF EXISTS GameHasOrders;
-CREATE TABLE IF NOT EXISTS GameHasOrders (
-    gameHasOrderID INT NOT NULL AUTO_INCREMENT,
-    gameID INT NOT NULL,
-    orderID INT NOT NULL,
-    PRIMARY KEY (gameHasOrderID),
-    -- The application logic will not allow deletion of orders since they are important historical transactions. If a game is associated with an order, it will also not be allowed to be deleted, but can be marked 'inactive'. This is needed to preserve transaction history. However if for admin reasons, the games or orders are desired to be deleted, it will clean up the records here in the junction table.
-    FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
-    FOREIGN KEY (orderID) REFERENCES Orders(orderID) ON DELETE CASCADE
-);
+
 -- -----------------------------------------------------
 -- Table GameHasPlatforms
 -- -----------------------------------------------------
@@ -114,22 +67,8 @@ CREATE TABLE IF NOT EXISTS GameHasPlatforms (
     FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
     FOREIGN KEY (platformID) REFERENCES Platforms(platformID) ON DELETE CASCADE
 );
--- -----------------------------------------------------
--- Table GameHasGenres
--- -----------------------------------------------------
-DROP TABLE IF EXISTS GameHasGenres;
-CREATE TABLE IF NOT EXISTS GameHasGenres (
-    gameHasGenreID INT NOT NULL AUTO_INCREMENT,
-    gameID INT NOT NULL,
-    genreID INT NOT NULL,
-    PRIMARY KEY (gameHasGenreID),
-    UNIQUE (gameID, genreID),
-    -- deleting a game or genre should delete its entry in this junction table
-    FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
-    FOREIGN KEY (genreID) REFERENCES Genres(genreID) ON DELETE CASCADE
-);
 
-
+-- -----------------------------------------------------
 -- Developers and Franchise data needs to be loaded first
 -- -----------------------------------------------------
 -- Data for table Developers
@@ -170,46 +109,6 @@ INSERT INTO Games (gameID, title, releaseYear, price, developerID, franchiseID, 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table Genres
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO Genres (genreID, name) VALUES 
-(1, 'Roleplaying'),
-(2, 'First Person Shooter'),
-(3, 'Platformer'),
-(4, 'Action'),
-(5, 'Fighting'),
-(6, 'Survival'),
-(7, 'Crafting'),
-(8, 'Sports'),
-(9, 'Farming');
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table Customers
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO Customers (customerID, firstName, lastName, email, rewardPoints, activeCustomer) VALUES 
-(1, 'Jackie', 'Harell', 'jh@amazon.com', 58, 1),
-(2, 'Nigel', 'Thornberry', 'nicktoons@yahoo.com', 12, 1),
-(3, 'Patrick', 'Bateman', 'pbateman@pp.com', 17, 1);
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table Orders
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO Orders (orderID, date, customerID) VALUES 
-(1, '2021-10-01', 1),
-(2, '2021-09-11', NULL),
-(3, '2021-08-21', NULL),
-(4, '2022-01-13', NULL),
-(5, '2022-01-25', NULL),
-(6, '2022-06-05', NULL),
-(7, '2022-07-14', 2);
-COMMIT;
-
--- -----------------------------------------------------
 -- Data for table Platforms
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -224,22 +123,7 @@ INSERT INTO Platforms (platformID, name) VALUES
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table OrderHasGames
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO GameHasOrders (gameHasOrderID, gameID, orderID) VALUES 
-(1, 1, 1),
-(2, 2, 1),
-(3, 4, 2),
-(4, 1, 3),
-(5, 2, 4),
-(6, 3, 4),
-(7, 4, 4),
-(8, 4, 4);
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table PlatformHasGames
+-- Data for table GameHasPlatforms
 -- -----------------------------------------------------
 START TRANSACTION;
 INSERT INTO GameHasPlatforms (gameHasPlatformID, gameID, platformID) VALUES 
@@ -252,21 +136,6 @@ INSERT INTO GameHasPlatforms (gameHasPlatformID, gameID, platformID) VALUES
 (7, 1, 4),
 (8, 2, 1),
 (9, 5, 4);
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table GameHasGenres
--- -----------------------------------------------------
-START TRANSACTION;
-INSERT INTO GameHasGenres (gameHasGenreID, gameID, genreID) VALUES 
-(1, 1, 3),
-(2, 1, 4),
-(3, 2, 4),
-(4, 3, 7),
-(5, 3, 9),
-(6, 4, 8),
-(7, 5, 1),
-(8, 5, 4);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
