@@ -10,14 +10,14 @@
  
  */
 -- -----------------------------------------------------
--- Read Game
+-- Read All Games
 -- -----------------------------------------------------
 SELECT Games.gameID AS 'Game ID',
     Games.title AS 'Title',
     Games.releaseYear AS 'Release Year',
     CONCAT('$', Games.price) AS 'Price',
     IFNULL(Developers.name, 'N/A') as 'Developer',
-    IFNULL(Franchises.title, 'N/A') as 'Franchise'
+    IFNULL(Franchises.title, 'N/A') as 'Franchise',
 FROM Games
     LEFT JOIN Developers ON Developers.developerID = Games.developerID
     LEFT JOIN Franchises ON Franchises.franchiseID = Games.franchiseID
@@ -48,24 +48,25 @@ SET title = :newGameTitle,
     price = :newPrice,
     developerID = :newDeveloper,
     franchiseID = :newFranchise,
-    WHERE gameID = :gameIDtoUpdate;
+WHERE gameID = :gameIDtoUpdate;
 -- -----------------------------------------------------
 --Delete Game
 -- -----------------------------------------------------
 DELETE FROM Games
 WHERE gameID = :gameIDToDelete;
+
 /* 
  
  Platforms page queries
  
  */
 -- -----------------------------------------------------
---Read Platform
+--Read All Platforms
 -- -----------------------------------------------------
-SELECT platformID,
-    name
+SELECT platformID AS 'Platform ID',
+    name AS 'Name'
 FROM Platforms
-ORDER BY name;
+ORDER BY platformID;
 -- -----------------------------------------------------
 --Create Platform
 -- -----------------------------------------------------
@@ -92,8 +93,8 @@ WHERE platformID = :platformIDToDelete;
 --Read Game-Platform 
 -- -----------------------------------------------------
 SELECT GameHasPlatforms.gameHasPlatformID,
-    Games.title as `Game`,
-    Platforms.name as `Platform`
+    Games.title as 'Game',
+    Platforms.name as 'Platform'
 FROM GameHasPlatforms
     JOIN Games ON Games.gameID = GameHasPlatforms.gameID
     JOIN Platforms ON Platforms.platformID = GameHasPlatforms.platformID
@@ -102,7 +103,10 @@ ORDER BY Games.title;
 --Create Game-Platform 
 -- -----------------------------------------------------
 INSERT INTO GameHasPlatforms (gameID, platformID)
-VALUES (:gameID, :platformID);
+VALUES (
+    :gameID,
+    :platformID
+    );
 -- -----------------------------------------------------
 --Update Game-Platform 
 -- -----------------------------------------------------
@@ -122,12 +126,19 @@ WHERE gameHasPlatformID = :gameHasPlatformIDToDelete;
  
  */
 -- -----------------------------------------------------
---Read Franchise
+--Read All Franchises
 -- -----------------------------------------------------
-SELECT franchiseID AS `Franchise ID`,
-    title AS `Title`
+SELECT franchiseID AS 'Franchise ID',
+    title AS 'Title'
 FROM Franchises
-ORDER BY title;
+ORDER BY franchiseID;
+-- -----------------------------------------------------
+--Read one specific Franchises
+-- -----------------------------------------------------
+SELECT franchiseID AS 'Franchise ID',
+    title AS 'Title'
+FROM Franchises
+WHERE franchiseID = :franchiseIDToFind
 -- -----------------------------------------------------
 --Create Franchise
 -- -----------------------------------------------------
@@ -137,8 +148,7 @@ VALUES (:titleOfFranchise);
 --Update Franchise
 -- -----------------------------------------------------
 UPDATE Franchises
-SET franchiseID = :franchiseIDToUpdate,
-    title = :newTitle
+SET title = :newTitle
 WHERE franchiseID = :franchiseIDToUpdate;
 -- -----------------------------------------------------
 --Delete Franchise
@@ -151,12 +161,12 @@ WHERE franchiseID = :franchiseIDToDelete;
  
  */
 -- -----------------------------------------------------
---Read Developer
+--Read All Developers
 -- -----------------------------------------------------
-SELECT developerID AS `Developer ID`,
-    name AS `Name`
+SELECT developerID AS 'Developer ID',
+    name AS 'Name'
 FROM Developers
-ORDER BY name;
+ORDER BY developerID;
 -- -----------------------------------------------------
 --Create Developer
 -- -----------------------------------------------------

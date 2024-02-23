@@ -1,15 +1,19 @@
 require("dotenv").config();
 const express = require("express"); 
-const db = require("./db-connector");
+const bodyParser = require('body-parser');
+
 const routes = require("./routes/index");
 
 const app = express(); 
-const PORT = process.env.PORT; // Set a port number at the top so it's easy to change in the future
-
+const PORT = process.env.PORT;
 
 // Middleware to parse form data
-// for parsing request bodies that are in JSON format
-app.use(express.json());
+
+//needed to parse url form data
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//root location to refer in the html. looks in here when referencing the locations of files, such as the styles.css in the link in the header partial
+app.use(express.static('public'));
 
 app.set("view engine", "ejs");
 

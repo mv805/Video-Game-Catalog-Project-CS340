@@ -12,12 +12,12 @@
 -- -----------------------------------------------------
 -- Read Game
 -- -----------------------------------------------------
-SELECT Games.gameID AS `Game ID`,
-    Games.title AS `Title`,
-    Games.releaseYear AS `Release Year`,
-    CONCAT('$', Games.price) AS `Price`,
-    Developers.name as `Developer`,
-    Franchises.title as `Franchise`,
+SELECT Games.gameID AS 'Game ID',
+    Games.title AS 'Title',
+    Games.releaseYear AS 'Release Year',
+    CONCAT('$', Games.price) AS 'Price',
+    IFNULL(Developers.name, 'N/A') as 'Developer',
+    IFNULL(Franchises.title, 'N/A') as 'Franchise',
 FROM Games
     LEFT JOIN Developers ON Developers.developerID = Games.developerID
     LEFT JOIN Franchises ON Franchises.franchiseID = Games.franchiseID
@@ -63,10 +63,10 @@ WHERE gameID = :gameIDToDelete;
 -- -----------------------------------------------------
 --Read Platform
 -- -----------------------------------------------------
-SELECT platformID,
-    name
+SELECT platformID AS 'Platform ID',
+    name AS 'Name'
 FROM Platforms
-ORDER BY name;
+ORDER BY platformID;
 -- -----------------------------------------------------
 --Create Platform
 -- -----------------------------------------------------
@@ -93,8 +93,8 @@ WHERE platformID = :platformIDToDelete;
 --Read Game-Platform 
 -- -----------------------------------------------------
 SELECT GameHasPlatforms.gameHasPlatformID,
-    Games.title as `Game`,
-    Platforms.name as `Platform`
+    Games.title as 'Game',
+    Platforms.name as 'Platform'
 FROM GameHasPlatforms
     JOIN Games ON Games.gameID = GameHasPlatforms.gameID
     JOIN Platforms ON Platforms.platformID = GameHasPlatforms.platformID
@@ -128,10 +128,10 @@ WHERE gameHasPlatformID = :gameHasPlatformIDToDelete;
 -- -----------------------------------------------------
 --Read Franchise
 -- -----------------------------------------------------
-SELECT franchiseID AS `Franchise ID`,
-    title AS `Title`
+SELECT franchiseID AS 'Franchise ID',
+    title AS 'Title'
 FROM Franchises
-ORDER BY title;
+ORDER BY franchiseID;
 -- -----------------------------------------------------
 --Create Franchise
 -- -----------------------------------------------------
@@ -157,10 +157,10 @@ WHERE franchiseID = :franchiseIDToDelete;
 -- -----------------------------------------------------
 --Read Developer
 -- -----------------------------------------------------
-SELECT developerID AS `Developer ID`,
-    name AS `Name`
+SELECT developerID AS 'Developer ID',
+    name AS 'Name'
 FROM Developers
-ORDER BY name;
+ORDER BY developerID;
 -- -----------------------------------------------------
 --Create Developer
 -- -----------------------------------------------------
