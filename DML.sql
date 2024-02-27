@@ -1,5 +1,5 @@
 /* 
- Database queries for the Game Quest Video Store Database
+ Database queries for the Game Quest Video Catalog Database
  By Jovanny Gochez and Matthew Villa
  
  !colon: character being used to denote the variables that will have data from the backend programming language
