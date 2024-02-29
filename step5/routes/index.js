@@ -19,7 +19,10 @@ router.post("/update-franchise", FranchiseController.update);
 
 //developer routes
 router.get("/developers", DeveloperController.index);
-
+router.post("/add-developer", DeveloperController.add);
+router.post("/delete-developer", DeveloperController.delete);
+router.post("/fill-update-form-developer", DeveloperController.fillForm);
+router.post("/update-developer", DeveloperController.update);
 //platform routes
 router.get("/platforms", PlatformController.index);
 

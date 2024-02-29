@@ -40,7 +40,6 @@ const GameController = {
       res.redirect("/");
     });
   },
-
 };
 
 module.exports = GameController;
