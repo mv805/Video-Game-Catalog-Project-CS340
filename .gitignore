@@ -1,4 +1,5 @@
 .env
+<<<<<<< HEAD
 handlebars-test/developerData.js
 handlebars-test/developers.html
 handlebars-test/gameData.js
@@ -8759,4 +8760,7 @@ step3/node_modules/yallist/LICENSE
 step3/node_modules/yallist/package.json
 step3/node_modules/yallist/README.md
 step3/node_modules/yallist/yallist.js
+>>>>>>> upstream/main
+=======
+node_modules
 >>>>>>> upstream/main

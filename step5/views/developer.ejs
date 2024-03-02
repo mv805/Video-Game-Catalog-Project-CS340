@@ -1,0 +1,67 @@
+<%- include('partials/_header') %> <%- include('partials/_nav') %>
+<h2>Developers Page</h2>
+<h3>Developers:</h3>
+<!-- Display all current developers -->
+<%- include('partials/_dataTable', {data: developers}) %>
+
+<!-- Creating developer form -->
+<h3>Create a Developer:</h3>
+<form action="/add-developer" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name-create" name="name" />
+  <button type="submit">Create Developer</button>
+</form>
+<!-- display the last inserted developer if its given -->
+<% if (typeof lastDeveloperCreated !== 'undefined') { %>
+<p class="info-field">Last Developer Created:</p>
+<%- include('partials/_dataTable', { data: lastDeveloperCreated }); %> <% } %>
+
+<!-- Delete a developer form -->
+<h3>Delete a Developer:</h3>
+<form action="/delete-developer" method="post">
+  <select name="developerId">
+    <% developers.forEach((item) => { %>
+    <option value="<%= item['Developer ID'] %>"><%= item['Name'] %></option>
+    <% }) %>
+  </select>
+  <button type="submit">Delete</button>
+</form>
+<!-- display the last deleted developer if its given -->
+<% if (typeof lastDeveloperDeleted !== 'undefined') { %>
+<p class="info-field">Last Developer Deleted: <%= lastDeveloperDeleted %></p>
+<% } %>
+
+<!-- Update developer form -->
+<h3>Update a Developer:</h3>
+<p>Please select a developer and press update to fill in the form</p>
+<form action="/fill-update-form-developer" method="post">
+  <select name="developerId">
+    <% developers.forEach((item) => { %>
+    <option value="<%= item['Developer ID'] %>"><%= item['Name'] %></option>
+    <% }) %>
+  </select>
+  <button type="submit">Fill Form</button>
+</form>
+
+<form action="/update-developer" method="post">
+  <label for="developerId">Developer ID:</label>
+  <input
+    type="text"
+    id="developerId-update"
+    name="developerId"
+    value="<%= updateFormFillData ? updateFormFillData['Developer ID'] : '' %>"
+  />
+  <label for="name">Name:</label>
+  <input
+    type="text"
+    id="name-update"
+    name="name"
+    value="<%= updateFormFillData ? updateFormFillData['Name'] : '' %>"
+  />
+  <button type="submit">Update</button>
+</form>
+<!-- Display the last developer updated if applicable -->
+<% if (typeof lastDeveloperUpdated !== 'undefined') { %>
+<p class="info-field">Last Developer Updated:</p>
+<%- include('partials/_dataTable', { data: lastDeveloperUpdated }); %> <% } %>
+<%- include('partials/_footer') %>
