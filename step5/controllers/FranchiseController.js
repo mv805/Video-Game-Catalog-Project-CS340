@@ -9,7 +9,8 @@ const FranchiseController = {
   index: async (req, res) => {
     try {
       //get the last inserted and deleted parameter if it exists
-      const { lastInsertId, lastDeletedTitle, updateFormId, lastUpdateId } = req.query;
+      const { lastInsertId, lastDeletedTitle, updateFormId, lastUpdateId } =
+        req.query;
 
       //get and display all the franchises on first load
       const franchises = await new Promise((resolve, reject) => {
@@ -47,7 +48,7 @@ const FranchiseController = {
       }
 
       let updateFormFillData;
-      if (updateFormId){
+      if (updateFormId) {
         updateFormFillData = await new Promise((resolve, reject) => {
           Franchise.findById(updateFormId, (err, result) => {
             if (err) reject(err);
@@ -62,7 +63,7 @@ const FranchiseController = {
         lastFranchiseCreated,
         lastFranchiseDeleted,
         updateFormFillData,
-        lastFranchiseUpdated
+        lastFranchiseUpdated,
       };
 
       res.render("franchise", renderOptions);
@@ -105,7 +106,6 @@ const FranchiseController = {
 
       const lastFranchiseDeleted = await new Promise((resolve, reject) => {
         Franchise.findById(franchiseId, (err, result) => {
-          console.log(result);
           if (err) reject(err);
           else resolve(result[0]);
         });
@@ -131,18 +131,11 @@ const FranchiseController = {
   fillForm: async (req, res) => {
     const { franchiseId } = req.body;
 
-    if (!franchiseId) {
-      return handleError(
-        res,
-        "The Franchise ID is required to fill in the update data."
-      );
-    }
-
     res.redirect(`/franchises?updateFormId=${franchiseId}`);
   },
   update: async (req, res) => {
     try {
-      const {franchiseId, title} = req.body;
+      const { franchiseId, title } = req.body;
 
       await new Promise((resolve, reject) => {
         Franchise.update(franchiseId, title, (err) => {
@@ -156,10 +149,9 @@ const FranchiseController = {
 
       res.redirect(`/franchises?lastUpdateId=${franchiseId}`);
     } catch (err) {
-      return handleError(err, err.message);
+      return handleError(res, err.message);
     }
-
-  }
+  },
 };
 
 module.exports = FranchiseController;
