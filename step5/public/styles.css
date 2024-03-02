@@ -10,3 +10,7 @@ form {
 .info-field {
   color: gold;
 }
+
+.required {
+  color: red;
+}

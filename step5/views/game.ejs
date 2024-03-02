@@ -1,6 +1,110 @@
-<%- include('partials/_header') %>
-<%- include('partials/_nav') %>
+<%- include('partials/_header') %> <%- include('partials/_nav') %>
 <h2>Games Page</h2>
 <h3>Games:</h3>
+<!-- Display all current games -->
 <%- include('partials/_dataTable', {data: games}) %>
+
+<!-- Creating game form -->
+<h3>Create a Game:</h3>
+<form action="/add-game" method="post">
+  <!--title  -->
+  <label for="title-create">Title<span class="required">*</span>:</label>
+  <input type="text" id="title-create" name="title" />
+  <!-- release year -->
+  <label for="releaseYear-create"
+    >Release Year<span class="required">*</span>:</label
+  >
+  <input type="text" id="releaseYear-create" name="releaseYear" />
+  <!-- price -->
+  <label for="price">Price:</label>
+  <input type="text" id="price-create" name="price" />
+  <!-- franchise selection -->
+  <label for="franchise-create">Franchise:</label>
+  <select name="franchiseId" id="franchise-create">
+    <option value="">N/A</option>
+    <% franchises.forEach((item) => { %>
+    <option value="<%= item['Franchise ID'] %>"><%= item['Title'] %></option>
+    <% }) %>
+  </select>
+  <!-- developer selection -->
+  <label for="developer-create">Developer:</label>
+  <select name="developerId" id="developer-create">
+    <option value="">N/A</option>
+    <% developers.forEach((item) => { %>
+    <option value="<%= item['Developer ID'] %>"><%= item['Name'] %></option>
+    <% }) %>
+  </select>
+
+  <button type="submit">Create Game</button>
+</form>
+
+<!-- Delete a game form -->
+<h3>Delete a Game:</h3>
+<form action="/delete-game" method="post">
+  <select name="gameId">
+    <% games.forEach((item) => { %>
+    <option value="<%= item['Game ID'] %>"><%= item['Title'] %></option>
+    <% }) %>
+  </select>
+  <button type="submit">Delete</button>
+</form>
+<!-- display the last deleted game if its given -->
+<% if (typeof lastGameDeleted !== 'undefined') { %>
+<p class="info-field">Last Game Deleted: <%= lastGameDeleted %></p>
+<% } %>
+
+<!-- display the last inserted game if its given -->
+<% if (typeof lastGameCreated !== 'undefined') { %>
+<p class="info-field">Last Game Created:</p>
+<%- include('partials/_dataTable', { data: lastGameCreated }); %> <% } %>
+
+<!-- Update game form -->
+<h3>Update a Game:</h3>
+<p>Please select a game and press 'Fill Form' to automatically fill in the update form</p>
+<form action="/fill-update-form-game" method="post">
+  <select name="gameId">
+    <% games.forEach((item) => { %>
+    <option value="<%= item['Game ID'] %>"><%= item['Title'] %></option>
+    <% }) %>
+  </select>
+  <button type="submit">Fill Form</button>
+</form>
+
+<form action="/update-game" method="post">
+  <label for="gameId">Game ID:</label>
+  <input
+    type="text"
+    id="gameId-update"
+    name="gameId"
+    value="<%= updateFormFillData ? updateFormFillData['Game ID'] : '' %>"
+  />
+  <label for="title">Title:</label>
+  <input
+    type="text"
+    id="title-update"
+    name="title"
+    value="<%= updateFormFillData ? updateFormFillData['Title'] : '' %>"
+  />
+
+  <label for="releaseYear-update">Release Year:</label>
+  <input
+    type="text"
+    id="releaseYear-update"
+    name="releaseYear"
+    value="<%= updateFormFillData ? updateFormFillData['Release Year'] : '' %>"
+  />
+
+  <label for="price-update">Price:</label>
+  <input
+    type="text"
+    id="price-update"
+    name="price"
+    value="<%= updateFormFillData ? updateFormFillData['Price'] : '' %>"
+  />
+  <button type="submit">Update</button>
+</form>
+<!-- Display the last game updated if applicable -->
+<% if (typeof lastGameUpdated !== 'undefined') { %>
+<p class="info-field">Last Game Updated:</p>
+<%- include('partials/_dataTable', { data: lastGameUpdated }); %> <% } %>
 <%- include('partials/_footer') %>
