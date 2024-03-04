@@ -31,7 +31,10 @@ const Franchise = {
         if (err) {
           callback(err, null);
         } else if (result.length === 0) {
-          callback(new Error("No record found with the given Franchise Id."), null);
+          callback(
+            new Error("No record found with the given Franchise Id."),
+            null
+          );
         } else {
           callback(null, result);
         }

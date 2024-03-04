@@ -104,7 +104,6 @@ const DeveloperController = {
 
       const lastDeveloperDeleted = await new Promise((resolve, reject) => {
         Developer.findById(developerId, (err, result) => {
-          console.log(result);
           if (err) reject(err);
           else resolve(result[0]);
         });
@@ -130,13 +129,6 @@ const DeveloperController = {
   fillForm: async (req, res) => {
     const { developerId } = req.body;
 
-    if (!developerId) {
-      return handleError(
-        res,
-        "The Developer ID is required to fill in the update data."
-      );
-    }
-
     res.redirect(`/developers?updateFormId=${developerId}`);
   },
   update: async (req, res) => {
@@ -155,7 +147,7 @@ const DeveloperController = {
 
       res.redirect(`/developers?lastUpdateId=${developerId}`);
     } catch (err) {
-      return handleError(err, err.message);
+      return handleError(res, err.message);
     }
   },
 };

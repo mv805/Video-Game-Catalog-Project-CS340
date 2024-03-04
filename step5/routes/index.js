@@ -10,8 +10,8 @@ const PlatformController = require("../controllers/PlatformController");
 router.get("/", GameController.index);
 router.post("/add-game", GameController.add);
 router.post("/delete-game", GameController.delete);
-router.post("/fill-update-form-game", GameController.fillForm);
-router.post("/update-game", GameController.update);
+// router.post("/fill-update-form-game", GameController.fillForm);
+// router.post("/update-game", GameController.update);
 
 //franchises routes
 router.get("/franchises", FranchiseController.index);
@@ -26,6 +26,7 @@ router.post("/add-developer", DeveloperController.add);
 router.post("/delete-developer", DeveloperController.delete);
 router.post("/fill-update-form-developer", DeveloperController.fillForm);
 router.post("/update-developer", DeveloperController.update);
+
 //platform routes
 router.get("/platforms", PlatformController.index);
 
