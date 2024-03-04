@@ -131,7 +131,6 @@ const GameController = {
 
       const lastGameDeleted = await new Promise((resolve, reject) => {
         Game.findById(gameId, (err, result) => {
-          console.log(result);
           if (err) reject(err);
           else resolve(result[0]);
         });
