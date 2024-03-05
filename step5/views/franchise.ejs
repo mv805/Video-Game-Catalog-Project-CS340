@@ -7,7 +7,7 @@
 <!-- Creating franchise form -->
 <h3>Create a Franchise:</h3>
 <form action="/add-franchise" method="post">
-  <label for="title">Title:</label>
+  <label for="title">Title<span class="required">*</span>:</label>
   <input type="text" id="title-create" name="title" />
   <button type="submit">Create Franchise</button>
 </form>
@@ -44,14 +44,14 @@
 </form>
 
 <form action="/update-franchise" method="post">
-  <label for="franchiseId">Franchise ID:</label>
+  <label for="franchiseId">Franchise ID<span class="required">*</span>:</label>
   <input
     type="text"
     id="franchiseId-update"
     name="franchiseId"
     value="<%= updateFormFillData ? updateFormFillData['Franchise ID'] : '' %>"
   />
-  <label for="title">Title:</label>
+  <label for="title">Title<span class="required">*</span>:</label>
   <input
     type="text"
     id="title-update"

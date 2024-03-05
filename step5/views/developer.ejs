@@ -7,7 +7,7 @@
 <!-- Creating developer form -->
 <h3>Create a Developer:</h3>
 <form action="/add-developer" method="post">
-  <label for="name">Name:</label>
+  <label for="name">Name<span class="required">*</span>:</label>
   <input type="text" id="name-create" name="name" />
   <button type="submit">Create Developer</button>
 </form>
@@ -44,14 +44,14 @@
 </form>
 
 <form action="/update-developer" method="post">
-  <label for="developerId">Developer ID:</label>
+  <label for="developerId">Developer ID<span class="required">*</span>:</label>
   <input
     type="text"
     id="developerId-update"
     name="developerId"
     value="<%= updateFormFillData ? updateFormFillData['Developer ID'] : '' %>"
   />
-  <label for="name">Name:</label>
+  <label for="name">Name<span class="required">*</span>:</label>
   <input
     type="text"
     id="name-update"
