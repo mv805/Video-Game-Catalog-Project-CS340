@@ -30,14 +30,13 @@ const Game = {
         VALUES (
             ?,
             ?,
-            ${price ? "?" : "NULL"},
+            ?,
             ${developerId ? "?" : "NULL"},
             ${franchiseId ? "?" : "NULL"}
         );
     `;
 
-    let params = [title, releaseYear];
-    if (price) params.push(price);
+    let params = [title, releaseYear, price];
     if (developerId) params.push(developerId);
     if (franchiseId) params.push(franchiseId);
 
@@ -83,7 +82,44 @@ const Game = {
         }
       }
     );
-  }
+  },
+  update: (
+    gameId,
+    title,
+    releaseYear,
+    price,
+    developerId,
+    franchiseId,
+    callback
+  ) => {
+    let sql = `
+      UPDATE Games
+      SET 
+        title = ?,
+        releaseYear = ?,
+        price = ?,
+        developerID = ${developerId ? "?" : "NULL"},
+        franchiseID = ${franchiseId ? "?" : "NULL"}
+      WHERE gameID = ?;
+      
+    `;
+
+    let params = [title, releaseYear, price];
+
+    if (developerId) params.push(developerId);
+    if (franchiseId) params.push(franchiseId);
+    params.push(gameId);
+
+    db.pool.query(sql, params, (err, result) => {
+      if (err) {
+        callback(err, null);
+      } else if (result.affectedRows === 0) {
+        callback(new Error("No record found with the given Game Id."));
+      } else {
+        callback(null, result);
+      }
+    });
+  },
 };
 
 module.exports = Game;

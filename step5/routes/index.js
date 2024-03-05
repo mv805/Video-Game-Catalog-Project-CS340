@@ -10,8 +10,8 @@ const PlatformController = require("../controllers/PlatformController");
 router.get("/", GameController.index);
 router.post("/add-game", GameController.add);
 router.post("/delete-game", GameController.delete);
-// router.post("/fill-update-form-game", GameController.fillForm);
-// router.post("/update-game", GameController.update);
+router.post("/fill-update-form-game", GameController.fillForm);
+router.post("/update-game", GameController.update);
 
 //franchises routes
 router.get("/franchises", FranchiseController.index);

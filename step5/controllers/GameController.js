@@ -69,6 +69,7 @@ const GameController = {
             else resolve(result[0]);
           });
         });
+        console.log("update data", updateFormFillData);
       }
 
       //template render options
@@ -92,10 +93,10 @@ const GameController = {
     //The paramaters for creating a new game. Title, release year are required
     const { title, releaseYear, price, developerId, franchiseId } = req.body;
 
-    if (!title || !releaseYear) {
+    if (!title || !releaseYear || !price) {
       return handleError(
         res,
-        "Game Title and Release Year is required when creating a Game."
+        "Game Title, Release Year, and Price is required when creating a Game."
       );
     } else if (isNaN(Number(releaseYear))) {
       return handleError(res, "Release year must be a number.");
@@ -123,10 +124,7 @@ const GameController = {
       const { gameId } = req.body;
 
       if (!gameId) {
-        return handleError(
-          res,
-          "The Game ID is required to delete a row."
-        );
+        return handleError(res, "The Game ID is required to delete a row.");
       }
 
       const lastGameDeleted = await new Promise((resolve, reject) => {
@@ -147,6 +145,48 @@ const GameController = {
       });
 
       res.redirect(`/?lastDeletedTitle=${lastGameDeleted["Title"]}`);
+    } catch (err) {
+      return handleError(res, err.message);
+    }
+  },
+  fillForm: async (req, res) => {
+    const { gameId } = req.body;
+
+    res.redirect(`/?updateFormId=${gameId}`);
+  },
+  update: async (req, res) => {
+    try {
+      const { gameId, title, releaseYear, price, developerId, franchiseId } =
+        req.body;
+
+      if (!title || !releaseYear || !price) {
+        return handleError(
+          res,
+          "Game Title, Release Year, and Price is required when updating a Game."
+        );
+      } else if (isNaN(Number(releaseYear))) {
+        return handleError(res, "Release year must be a number.");
+      };
+
+      await new Promise((resolve, reject) => {
+        Game.update(
+          gameId,
+          title,
+          releaseYear,
+          price,
+          developerId,
+          franchiseId,
+          (err) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          }
+        );
+      });
+
+      res.redirect(`/?lastUpdateId=${gameId}`);
     } catch (err) {
       return handleError(res, err.message);
     }
