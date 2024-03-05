@@ -128,7 +128,12 @@ const DeveloperController = {
   },
   fillForm: async (req, res) => {
     const { developerId } = req.body;
-
+    if (!developerId) {
+      return handleError(
+        res,
+        "No developer to update selected, please try again."
+      );
+    }
     res.redirect(`/developers?updateFormId=${developerId}`);
   },
   update: async (req, res) => {

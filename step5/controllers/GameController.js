@@ -151,7 +151,9 @@ const GameController = {
   },
   fillForm: async (req, res) => {
     const { gameId } = req.body;
-
+    if (!gameId) {
+      return handleError(res, "No game to update selected, please try again.");
+    }
     res.redirect(`/?updateFormId=${gameId}`);
   },
   update: async (req, res) => {
@@ -166,7 +168,7 @@ const GameController = {
         );
       } else if (isNaN(Number(releaseYear))) {
         return handleError(res, "Release year must be a number.");
-      };
+      }
 
       await new Promise((resolve, reject) => {
         Game.update(
