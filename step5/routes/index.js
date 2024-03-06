@@ -25,6 +25,10 @@ router.post("/fill-update-form-developer", DeveloperController.fillForm);
 router.post("/update-developer", DeveloperController.update);
 //platform routes
 router.get("/platforms", PlatformController.index);
+router.post("/add-platform", PlatformController.add);
+router.post("/delete-platform", PlatformController.delete);
+router.post("/fill-update-form-platform", PlatformController.fillForm);
+router.post("/update-platform", PlatformController.update);
 
 //for handling errors that might occur during the interactions
 router.get("/error", (req, res) => {

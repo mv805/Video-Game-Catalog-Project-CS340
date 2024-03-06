@@ -1,5 +1,5 @@
 /*
-DDL and DML for teh 'Game Quest' Video game catalog database system
+DDL for 'Game Quest' Video game catalog database system
 
 by Jovanny Gochez and Matt Villa
 
