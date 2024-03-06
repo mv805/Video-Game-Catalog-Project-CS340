@@ -1,9 +1,11 @@
+const GameHasPlatform = require("../models/GameHasPlatform");
+const Game = require("../models/Game");
 const Platform = require("../models/Platform");
 const handleError = require("../errorHandler");
 
-const PlatformController = {
+const GameHasPlatformController = {
   //This is the main index
-  //it will display the platforms by default
+  //it will display the gamehasplatforms by default
   //also its possible there could be query parameters which conditionally display different notifications about the last taken actions, delted, updated, created etc.
 
   index: async (req, res) => {
@@ -12,35 +14,49 @@ const PlatformController = {
       const { lastInsertId, lastDeletedName, updateFormId, lastUpdateId } =
         req.query;
 
-      //get and display all the platforms on first load
+      //get and display all the gamehasplatforms on first load
+      const gamehasplatforms = await new Promise((resolve, reject) => {
+        GameHasPlatform.getAll((err, results) => {
+          if (err) reject(err);
+          else resolve(results);
+        });
+      });
+      //get games for the id selectors
+      const games = await new Promise((resolve, reject) => {
+        Game.getAll((err, results) => {
+          if (err) reject(err);
+          else resolve(results);
+        });
+      });
+
+      //get platforms for the id selectors
       const platforms = await new Promise((resolve, reject) => {
         Platform.getAll((err, results) => {
           if (err) reject(err);
           else resolve(results);
         });
       });
-
       //depending on the parameters in the url, the following values might be given to the options for the next render. They are used to conditionally render parts of the html
 
-      let lastPlatformCreated;
+      let lastGameHasPlatformCreated;
       if (lastInsertId) {
-        lastPlatformCreated = await new Promise((resolve, reject) => {
-          Platform.findById(lastInsertId, (err, result) => {
+        lastGameHasPlatformCreated = await new Promise((resolve, reject) => {
+          GameHasPlatform.findById(lastInsertId, (err, result) => {
             if (err) reject(err);
             else resolve(result);
           });
         });
       }
 
-      let lastPlatformDeleted;
+      let lastGameHasPlatformDeleted;
       if (lastDeletedName) {
-        lastPlatformDeleted = lastDeletedName;
+        lastGameHasPlatformDeleted = lastDeletedName;
       }
 
-      let lastPlatformUpdated;
+      let lastGameHasPlatformUpdated;
       if (lastUpdateId) {
-        lastPlatformUpdated = await new Promise((resolve, reject) => {
-          Platform.findById(lastUpdateId, (err, result) => {
+        lastGameHasPlatformUpdated = await new Promise((resolve, reject) => {
+          GameHasPlatform.findById(lastUpdateId, (err, result) => {
             if (err) reject(err);
             else resolve(result);
           });
@@ -50,7 +66,7 @@ const PlatformController = {
       let updateFormFillData;
       if (updateFormId) {
         updateFormFillData = await new Promise((resolve, reject) => {
-          Platform.findById(updateFormId, (err, result) => {
+          GameHasPlatform.findById(updateFormId, (err, result) => {
             if (err) reject(err);
             else resolve(result[0]);
           });
@@ -59,60 +75,52 @@ const PlatformController = {
 
       //template render options
       let renderOptions = {
+        gamehasplatforms,
+        games,
         platforms,
-        lastPlatformCreated,
-        lastPlatformDeleted,
+        lastGameHasPlatformCreated,
+        lastGameHasPlatformDeleted,
         updateFormFillData,
-        lastPlatformUpdated,
+        lastGameHasPlatformUpdated,
       };
 
-      res.render("platform", renderOptions);
+      res.render("gamehasplatform", renderOptions);
     } catch (err) {
       console.log(err);
-      res.status(500).send("An error occured rendering the platform page.");
+      res.status(500).send("An error occured rendering the gamehasplatform page.");
     }
   },
   add: (req, res) => {
     //a name is needed and should be given in the body
-    const { name } = req.body;
+    const {gameId, platformId} = req.body;
 
-    if (!name) {
-      return handleError(
-        res,
-        "Platform Name is required when creating a platform."
-      );
-    }
-
-    Platform.add(name, (err, results) => {
+    GameHasPlatform.add(gameId, platformId, (err, results) => {
       if (err) {
         console.log(err);
         // Redirect to an error page
         return handleError(res, err.message);
       }
       //redirect to index, but give the last created row id so it can be highlighted to the user
-      res.redirect(`/platforms?lastInsertId=${results.insertId}`);
+      res.redirect(`/gamehasplatform?lastInsertId=${results.insertId}`);
     });
   },
   delete: async (req, res) => {
     try {
-      const { platformId } = req.body;
+      const { gamehasplatformId } = req.body;
 
-      if (!platformId) {
-        return handleError(
-          res,
-          "The Platform ID is required to delete a row."
-        );
+      if (!gamehasplatformId) {
+        return handleError(res, "The GameHasPlatform ID is required to delete a row.");
       }
 
-      const lastPlatformDeleted = await new Promise((resolve, reject) => {
-        Platform.findById(platformId, (err, result) => {
+      const lastGameHasPlatformDeleted = await new Promise((resolve, reject) => {
+        GameHasPlatform.findById(gamehasplatformId, (err, result) => {
           if (err) reject(err);
           else resolve(result[0]);
         });
       });
 
       await new Promise((resolve, reject) => {
-        Platform.delete(platformId, (err) => {
+        GameHasPlatform.delete(gamehasplatformId, (err) => {
           if (err) {
             reject(err);
           } else {
@@ -122,23 +130,23 @@ const PlatformController = {
       });
 
       res.redirect(
-        `/platforms?lastDeletedName=${lastPlatformDeleted["Name"]}`
+        `/gamehasplatform?lastDeletedName=${lastGameHasPlatformDeleted["Name"]}`
       );
     } catch (err) {
       return handleError(res, err.message);
     }
   },
   fillForm: async (req, res) => {
-    const { platformId } = req.body;
+    const { gamehasplatformId } = req.body;
 
-    res.redirect(`/platforms?updateFormId=${platformId}`);
+    res.redirect(`/gamehasplatform?updateFormId=${gamehasplatformId}`);
   },
   update: async (req, res) => {
     try {
-      const { platformId, name } = req.body;
+      const { gamehasplatformId, gameId, platformId} = req.body;
 
       await new Promise((resolve, reject) => {
-        Platform.update(platformId, name, (err) => {
+        GameHasPlatform.update(gamehasplatformId, gameId, platformId, (err) => {
           if (err) {
             reject(err);
           } else {
@@ -147,11 +155,11 @@ const PlatformController = {
         });
       });
 
-      res.redirect(`/platforms?lastUpdateId=${platformId}`);
+      res.redirect(`/gamehasplatform?lastUpdateId=${gamehasplatformId}`);
     } catch (err) {
       return handleError(res, err.message);
     }
   },
 };
 
-module.exports = PlatformController;
+module.exports = GameHasPlatformController;
