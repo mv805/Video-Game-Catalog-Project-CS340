@@ -22,8 +22,8 @@ const GameHasPlatform = {
             platformID
         )
         VALUES (
-            ${gameId ? "?" : "NULL"},
-            ${platformId ? "?" : "NULL"}
+            ${gameId ? "?" : NULL},
+            ${platformId ? "?" : NULL}
         );
     `;
 
@@ -79,10 +79,10 @@ const GameHasPlatform = {
   ) => {
     let sql = `
       UPDATE GameHasPlatforms
-      SET gamehasplatformID = ?
-        gameID = ${gameId ? "?" : "NULL"},
-        platformID = ${platformId ? "?" : "NULL"}
-      WHERE gamehasplatformID = ?;
+      SET 
+        gameID = ${gameId ? "?" : NULL},
+        platformID = ${platformId ? "?" : NULL}
+      WHERE gameHasPlatformID = ?;
       
     `;
 
