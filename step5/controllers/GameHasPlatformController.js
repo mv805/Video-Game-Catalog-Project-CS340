@@ -101,7 +101,7 @@ const GameHasPlatformController = {
         return handleError(res, err.message);
       }
       //redirect to index, but give the last created row id so it can be highlighted to the user
-      res.redirect(`/gamehasplatform?lastInsertId=${results.insertId}`);
+      res.redirect(`/gamehasplatforms?lastInsertId=${results.insertId}`);
     });
   },
   delete: async (req, res) => {
@@ -130,7 +130,7 @@ const GameHasPlatformController = {
       });
 
       res.redirect(
-        `/gamehasplatform?lastDeletedName=${lastGameHasPlatformDeleted["Name"]}`
+        `/gamehasplatforms?lastDeletedTitle=${lastGameHasPlatformDeleted["Title"]}`
       );
     } catch (err) {
       return handleError(res, err.message);
@@ -139,7 +139,7 @@ const GameHasPlatformController = {
   fillForm: async (req, res) => {
     const { gamehasplatformId } = req.body;
 
-    res.redirect(`/gamehasplatform?updateFormId=${gamehasplatformId}`);
+    res.redirect(`/gamehasplatforms?updateFormId=${gamehasplatformId}`);
   },
   update: async (req, res) => {
     try {
@@ -155,7 +155,7 @@ const GameHasPlatformController = {
         });
       });
 
-      res.redirect(`/gamehasplatform?lastUpdateId=${gamehasplatformId}`);
+      res.redirect(`/gamehasplatforms?lastUpdateId=${gamehasplatformId}`);
     } catch (err) {
       return handleError(res, err.message);
     }
