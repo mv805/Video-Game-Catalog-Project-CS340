@@ -32,7 +32,7 @@
 <form action="/delete-gamehasplatform" method="post">
   <select name="gamehasplatformId">
     <% gamehasplatforms.forEach((item) => { %>
-    <option value="<%= item['GameHasPlatformID'] %>"><%= item['gameHasPlatformID'] %></option>
+    <option value="<%= item['GameHasPlatform ID'] %>"><%= item['gameHasPlatformID'] %></option>
     <% }) %>
   </select>
   <button type="submit">Delete</button>
@@ -54,7 +54,7 @@
   <select name="gamehasplatformId">
     <option value="">-Select-</option>
     <% gamehasplatforms.forEach((item) => { %>
-    <option value="<%= item['GameHasPlatformID'] %>"><%= item['gameHasPlatformID'] %></option>
+    <option value="<%= item['GameHasPlatform ID'] %>"><%= item['gameHasPlatformID'] %></option>
     <% }) %>
   </select>
   <button type="submit">Fill Form</button>
@@ -66,7 +66,7 @@
     type="text"
     id="gamehasplatformId-update"
     name="gamehasplatformId"
-    value="<%= updateFormFillData ? updateFormFillData['GameHasPlatformID'] : '' %>"
+    value="<%= updateFormFillData ? updateFormFillData['GameHasPlatform ID'] : '' %>"
   />
   <!-- game selection -->
   <label for="game-update">Game:</label>
