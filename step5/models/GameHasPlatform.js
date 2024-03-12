@@ -4,7 +4,7 @@ const GameHasPlatform = {
   getAll: (callback) => {
     db.pool.query(
       `
-        SELECT GameHasPlatforms.gameHasPlatformID,
+        SELECT GameHasPlatforms.gameHasPlatformID as 'GameHasPlatform ID',
             Games.title as 'Game',
             Platforms.name as 'Platform'
         FROM GameHasPlatforms
@@ -36,14 +36,13 @@ const GameHasPlatform = {
   findById: (gamehasplatformId, callback) => {
     db.pool.query(
       `
-        SELECT GameHasPlatforms.gameHasPlatformID,
+        SELECT GameHasPlatforms.gameHasPlatformID as 'GameHasPlatform ID',
             Games.title as 'Game',
             Platforms.name as 'Platform'
         FROM GameHasPlatforms
             JOIN Games ON Games.gameID = GameHasPlatforms.gameID
             JOIN Platforms ON Platforms.platformID = GameHasPlatforms.platformID
-        ORDER BY Games.title;
-
+        WHERE GameHasPlatforms.gameHasPlatformID = ?;
       `,
       [gamehasplatformId],
       (err, result) => {
@@ -79,11 +78,9 @@ const GameHasPlatform = {
   ) => {
     let sql = `
       UPDATE GameHasPlatforms
-      SET gamehasplatformID = ?
-        gameID = ${gameId ? "?" : "NULL"},
-        platformID = ${platformId ? "?" : "NULL"}
+      SET  gameID = ${gameId ? "?" : "NULL"},
+           platformID = ${platformId ? "?" : "NULL"}
       WHERE gamehasplatformID = ?;
-      
     `;
 
     let params = [];

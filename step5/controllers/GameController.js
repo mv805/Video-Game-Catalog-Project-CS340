@@ -69,7 +69,6 @@ const GameController = {
             else resolve(result[0]);
           });
         });
-        console.log("update data", updateFormFillData);
       }
 
       //template render options

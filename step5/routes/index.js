@@ -6,6 +6,7 @@ const FranchiseController = require("../controllers/FranchiseController");
 const DeveloperController = require("../controllers/DeveloperController");
 const PlatformController = require("../controllers/PlatformController");
 const GameHasPlatformController = require("../controllers/GameHasPlatformController");
+
 //game routes
 router.get("/", GameController.index);
 router.post("/add-game", GameController.add);
