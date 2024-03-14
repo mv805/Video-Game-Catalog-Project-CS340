@@ -130,7 +130,12 @@ const PlatformController = {
   },
   fillForm: async (req, res) => {
     const { platformId } = req.body;
-
+    if (!platformId) {
+      return handleError(
+        res,
+        "No platform to update selected, please try again."
+      );
+    }
     res.redirect(`/platforms?updateFormId=${platformId}`);
   },
   update: async (req, res) => {

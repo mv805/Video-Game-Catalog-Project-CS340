@@ -26,3 +26,6 @@ form {
 h3{
   text-align: left;
 }
+.required {
+  color: red;
+}

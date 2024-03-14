@@ -21,6 +21,7 @@
     ...More rows...
 ] 
 -->
+<% if (data && data.length > 0) { %>
 <table>
   <thead>
     <tr>
@@ -40,3 +41,6 @@
     <% }); %>
   </tbody>
 </table>
+<% } else { %>
+<p>No data to display.</p>
+<% } %>

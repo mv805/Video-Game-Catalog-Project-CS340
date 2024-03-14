@@ -130,7 +130,9 @@ const FranchiseController = {
   },
   fillForm: async (req, res) => {
     const { franchiseId } = req.body;
-
+    if (!franchiseId){
+      return handleError(res, "No franchise to update selected, please try again.");
+    }
     res.redirect(`/franchises?updateFormId=${franchiseId}`);
   },
   update: async (req, res) => {
