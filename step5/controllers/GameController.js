@@ -69,6 +69,12 @@ const GameController = {
             else resolve(result[0]);
           });
         });
+
+        //takes off dollar sign from model data
+        updateFormFillData = {
+          ...updateFormFillData,
+          'Price': updateFormFillData['Price'].slice(1)
+        };
       }
 
       //template render options
