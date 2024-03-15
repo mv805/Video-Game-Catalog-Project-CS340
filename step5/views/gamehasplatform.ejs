@@ -1,43 +1,55 @@
-<%- include('partials/_header') %> <%- include('partials/_nav') %>
+<%- include('partials/_header') %> 
+<%- include('partials/_nav') %>
+<!-- Link the external CSS file -->
 <h2>Game Platform Page</h2>
-<h3>All Games and their Platforms:</h3>
+<h3>Read Games and Platforms Combination:</h3>
 <!-- Display all current gamehasplatforms -->
 <%- include('partials/_dataTable', {data: gamehasplatforms}) %>
 
 <!-- Creating gamehasplatform form -->
-<h3>Create a Game and its Platform Combination:</h3>
-<form action="/add-gamehasplatform" method="post">
-  <!-- game selection -->
-  <label for="game-create">Game<span class="required">*</span>:</label>
-  <select name="gameId" id="game-create">
-    <option value="">N/A</option>
-    <% games.forEach((item) => { %>
-    <option value="<%= item['Game ID'] %>"><%= item['Title'] %></option>
-    <% }) %>
-  </select>
-  <!-- platform selection -->
-  <label for="platform-create">Platform<span class="required">*</span>:</label>
-  <select name="platformId" id="platform-create">
-    <option value="">N/A</option>
-    <% platforms.forEach((item) => { %>
-    <option value="<%= item['Platform ID'] %>"><%= item['Name'] %></option>
-    <% }) %>
-  </select>
-
-  <button type="submit">Create GameHasPlatform</button>
-</form>
+<div class="form-container">
+  <h3>Create a Game and Platform Combination:</h3>
+  <form action="/add-gamehasplatform" method="post">
+    <!-- game selection -->
+    <div>
+      <label for="game-create">Game<span class="required">*</span>:</label>
+      <select name="gameId" id="game-create">
+        <option value="">N/A</option>
+        <% games.forEach((item) => { %>
+        <option value="<%= item['Game ID'] %>"><%= item['Title'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <!-- platform selection -->
+    <div>
+      <label for="platform-create">Platform<span class="required">*</span>:</label>
+      <select name="platformId" id="platform-create">
+        <option value="">N/A</option>
+        <% platforms.forEach((item) => { %>
+        <option value="<%= item['Platform ID'] %>"><%= item['Name'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Create GameHasPlatform</button>
+  </form>
+</div>
 
 <!-- Delete a gamehasplatform form -->
-<h3>Delete a Game and Platform Combination:</h3>
-<form action="/delete-gamehasplatform" method="post">
-  <select name="gamehasplatformId">
-    <option value="">N/A</option>
-    <% gamehasplatforms.forEach((item) => { %>
-    <option value="<%= item['GameHasPlatform ID'] %>"><%= item['GameHasPlatform ID'] %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Delete</button>
-</form>
+<div class="form-container">
+  <h3>Delete a Game and Platform Combination:</h3>
+  <form action="/delete-gamehasplatform" method="post">
+    <div>
+      <select name="gamehasplatformId">
+        <option value="">N/A</option>
+        <% gamehasplatforms.forEach((item) => { %>
+        <option value="<%= item['GameHasPlatform ID'] %>"><%= item['GameHasPlatform ID'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Delete</button>
+  </form>
+</div>
+
 <!-- display the last deleted gamehasplatform if its given -->
 <% if (typeof lastGameHasPlatformDeleted !== 'undefined') { %>
 <p class="info-field">Last GameHasPlatform Deleted: <%= lastGameHasPlatformDeleted %></p>
@@ -49,43 +61,52 @@
 <%- include('partials/_dataTable', { data: lastGameHasPlatformCreated }); %> <% } %>
 
 <!-- Update gamehasplatform form -->
-<h3>Update a Game and Platform Combination:</h3>
-<p>Please select a GameHasPlatform ID to update and press 'Fill Form' to automatically fill in the update form if necessary. Otherwise enter the ID manually.</p>
-<form action="/fill-update-form-gamehasplatform" method="post">
-  <select name="gamehasplatformId">
-    <option value="">-Select-</option>
-    <% gamehasplatforms.forEach((item) => { %>
-    <option value="<%= item['GameHasPlatform ID'] %>"><%= item['GameHasPlatform ID'] %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Fill Form</button>
-</form>
-<form action="/update-gamehasplatform" method="post">
-  <label for="gamehasplatformId">GameHasPlatform ID<span class="required">*</span>:</label>
-  <input
-    type="text"
-    id="gamehasplatformId-update"
-    name="gamehasplatformId"
-    value="<%= updateFormFillData ? updateFormFillData['GameHasPlatform ID'] : '' %>"
-  />
-  <!-- game selection -->
-  <label for="game-update">Game<span class="required">*</span>:</label>
-  <select name="gameId" id="game-update">
-    <option value="" <%= !updateFormFillData ? 'selected' : '' %>>N/A</option>
-    <% games.forEach((item) => { %>
-    <option value="<%= item['Game ID'] %>" <%= updateFormFillData && updateFormFillData['Game'] == item['Title'] ? 'selected' : '' %>><%= item['Title'] %></option>
-    <% }) %>
-  </select>
-  <!-- platform selection -->
-  <label for="platform-update">Platform<span class="required">*</span>:</label>
-  <select name="platformId" id="platform-update">
-    <option value="" <%= !updateFormFillData ? 'selected' : '' %>>N/A</option>
-    <% platforms.forEach((item) => { %>
-    <option value="<%= item['Platform ID'] %>" <%= updateFormFillData && updateFormFillData['Platform'] == item['Name'] ? 'selected' : '' %>><%= item['Name'] %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Update</button>
-</form>
+<div class="form-container">
+  <h3>Update a Game and Platform Combination:</h3>
+  <p><em>Please select an ID and press 'Fill Form' to automatically fill in the update form:</em></p>
+  <form action="/fill-update-form-gamehasplatform" method="post">
+    <div>
+      <select name="gamehasplatformId">
+        <option value="">-Select-</option>
+        <% gamehasplatforms.forEach((item) => { %>
+        <option value="<%= item['GameHasPlatform ID'] %>"><%= item['GameHasPlatform ID'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Fill Form</button>
+  </form>
+</div>
+
+<div class="form-container">
+  <form action="/update-gamehasplatform" method="post">
+    <div>
+      <label for="gamehasplatformId">GameHasPlatform ID<span class="required">*</span>:</label>
+      <input type="text" id="gamehasplatformId-update" name="gamehasplatformId" value="<%= updateFormFillData ? updateFormFillData['GameHasPlatform ID'] : '' %>" />
+    </div>
+    <!-- game selection -->
+    <div>
+      <label for="game-update">Game<span class="required">*</span>:</label>
+      <select name="gameId" id="game-update">
+        <option value="" <%= !updateFormFillData ? 'selected' : '' %>>N/A</option>
+        <% games.forEach((item) => { %>
+        <option value="<%= item['Game ID'] %>" <%= updateFormFillData && updateFormFillData['Game'] == item['Title'] ? 'selected' : '' %>><%= item['Title'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <!-- platform selection -->
+    <div>
+      <label for="platform-update">Platform<span class="required">*</span>:</label>
+      <select name="platformId" id="platform-update">
+        <option value="" <%= !updateFormFillData ? 'selected' : '' %>>N/A</option>
+        <% platforms.forEach((item) => { %>
+        <option value="<%= item['Platform ID'] %>" <%= updateFormFillData && updateFormFillData['Platform'] == item['Name'] ? 'selected' : '' %>><%= item['Name'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Update</button>
+  </form>
+</div>
+
 <!-- Display the last gamehasplatform updated if applicable -->
 <% if (typeof lastGameHasPlatformUpdated !== 'undefined') { %>
 <p class="info-field">Last GameHasPlatform Updated:</p>

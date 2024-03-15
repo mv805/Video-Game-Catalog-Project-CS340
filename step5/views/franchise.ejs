@@ -1,67 +1,87 @@
-<%- include('partials/_header') %> <%- include('partials/_nav') %>
+<%- include('partials/_header') %> 
+<%- include('partials/_nav') %>
+<!-- Link the external CSS file -->
 <h2>Franchises Page</h2>
-<h3>Franchises:</h3>
+<h3>Read Franchises:</h3>
 <!-- Display all current franchises -->
 <%- include('partials/_dataTable', {data: franchises}) %>
 
 <!-- Creating franchise form -->
-<h3>Create a Franchise:</h3>
-<form action="/add-franchise" method="post">
-  <label for="title">Title<span class="required">*</span>:</label>
-  <input type="text" id="title-create" name="title" />
-  <button type="submit">Create Franchise</button>
-</form>
-<!-- display the last inserted franchise if its given -->
-<% if (typeof lastFranchiseCreated !== 'undefined') { %>
-<p class="info-field">Last Franchise Created:</p>
-<%- include('partials/_dataTable', { data: lastFranchiseCreated }); %> <% } %>
+<div class="form-container">
+  <h3>Create a Franchise:</h3>
+  <form action="/add-franchise" method="post">
+    <div>
+      <label for="title">Title<span class="required">*</span>:</label>
+      <input type="text" id="title-create" name="title" />
+    </div>
+    <button type="submit">Create Franchise</button>
+  </form>
+  <!-- display the last inserted franchise if its given -->
+  <% if (typeof lastFranchiseCreated !== 'undefined') { %>
+  <p class="info-field">Last Franchise Created:</p>
+  <%- include('partials/_dataTable', { data: lastFranchiseCreated }); %> <% } %>
+</div>
 
 <!-- Delete a franchise form -->
-<h3>Delete a Franchise:</h3>
-<form action="/delete-franchise" method="post">
-  <select name="franchiseId">
-    <% franchises.forEach((item) => { %>
-    <option value="<%= item['Franchise ID'] %>"><%= item['Title'] %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Delete</button>
-</form>
-<!-- display the last deleted franchise if its given -->
-<% if (typeof lastFranchiseDeleted !== 'undefined') { %>
-<p class="info-field">Last Franchise Deleted: <%= lastFranchiseDeleted %></p>
-<% } %>
+<div class="form-container">
+  <h3>Delete a Franchise:</h3>
+  <form action="/delete-franchise" method="post">
+    <div>
+      <select name="franchiseId">
+        <% franchises.forEach((item) => { %>
+        <option value="<%= item['Franchise ID'] %>"><%= item['Title'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Delete</button>
+  </form>
+  <!-- display the last deleted franchise if its given -->
+  <% if (typeof lastFranchiseDeleted !== 'undefined') { %>
+  <p class="info-field">Last Franchise Deleted: <%= lastFranchiseDeleted %></p>
+  <% } %>
+</div>
 
 <!-- Update franchise form -->
-<h3>Update a Franchise:</h3>
-<p>Please select a franchise and press update to fill in the form</p>
-<form action="/fill-update-form-franchise" method="post">
-  <select name="franchiseId">
-    <% franchises.forEach((item) => { %>
-    <option value="<%= item['Franchise ID'] %>"><%= item['Title'] %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Fill Form</button>
-</form>
+<div class="form-container">
+  <h3>Update a Franchise:</h3>
+  <p><em>Please select a franchise and press 'Fill Form' to automatically fill in the update form:</em></p>
+  <form action="/fill-update-form-franchise" method="post">
+    <div>
+      <select name="franchiseId">
+        <% franchises.forEach((item) => { %>
+        <option value="<%= item['Franchise ID'] %>"><%= item['Title'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Fill Form</button>
+  </form>
+</div>
 
-<form action="/update-franchise" method="post">
-  <label for="franchiseId">Franchise ID<span class="required">*</span>:</label>
-  <input
-    type="text"
-    id="franchiseId-update"
-    name="franchiseId"
-    value="<%= updateFormFillData ? updateFormFillData['Franchise ID'] : '' %>"
-  />
-  <label for="title">Title<span class="required">*</span>:</label>
-  <input
-    type="text"
-    id="title-update"
-    name="title"
-    value="<%= updateFormFillData ? updateFormFillData['Title'] : '' %>"
-  />
-  <button type="submit">Update</button>
-</form>
-<!-- Display the last franchise updated if applicable -->
-<% if (typeof lastFranchiseUpdated !== 'undefined') { %>
-<p class="info-field">Last Franchise Updated:</p>
-<%- include('partials/_dataTable', { data: lastFranchiseUpdated }); %> <% } %>
+<div class="form-container">
+  <form action="/update-franchise" method="post">
+    <div>
+      <label for="franchiseId">Franchise ID<span class="required">*</span>:</label>
+      <input
+        type="text"
+        id="franchiseId-update"
+        name="franchiseId"
+        value="<%= updateFormFillData ? updateFormFillData['Franchise ID'] : '' %>"
+      />
+    </div>
+    <div>
+      <label for="title">Title<span class="required">*</span>:</label>
+      <input
+        type="text"
+        id="title-update"
+        name="title"
+        value="<%= updateFormFillData ? updateFormFillData['Title'] : '' %>"
+      />
+    </div>
+    <button type="submit">Update</button>
+  </form>
+  <!-- Display the last franchise updated if applicable -->
+  <% if (typeof lastFranchiseUpdated !== 'undefined') { %>
+  <p class="info-field">Last Franchise Updated:</p>
+  <%- include('partials/_dataTable', { data: lastFranchiseUpdated }); %> <% } %>
+</div>
 <%- include('partials/_footer') %>

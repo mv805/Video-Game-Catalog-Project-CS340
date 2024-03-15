@@ -1,67 +1,87 @@
-<%- include('partials/_header') %> <%- include('partials/_nav') %>
+<%- include('partials/_header') %> 
+<%- include('partials/_nav') %>
+<!-- Link the external CSS file -->
 <h2>Platforms Page</h2>
-<h3>Platforms:</h3>
+<h3>Read Platforms:</h3>
 <!-- Display all current platforms -->
 <%- include('partials/_dataTable', {data: platforms}) %>
 
 <!-- Creating platform form -->
-<h3>Create a Platform:</h3>
-<form action="/add-platform" method="post">
-  <label for="name">Name<span class="required">*</span>:</label>
-  <input type="text" id="name-create" name="name" />
-  <button type="submit">Create Platform</button>
-</form>
-<!-- display the last inserted platform if its given -->
-<% if (typeof lastPlatformCreated !== 'undefined') { %>
-<p class="info-field">Last Platform Created:</p>
-<%- include('partials/_dataTable', { data: lastPlatformCreated }); %> <% } %>
+<div class="form-container">
+  <h3>Create a Platform:</h3>
+  <form action="/add-platform" method="post">
+    <div>
+      <label for="name">Name<span class="required">*</span>:</label>
+      <input type="text" id="name-create" name="name" />
+    </div>
+    <button type="submit">Create Platform</button>
+  </form>
+  <!-- display the last inserted platform if its given -->
+  <% if (typeof lastPlatformCreated !== 'undefined') { %>
+  <p class="info-field">Last Platform Created:</p>
+  <%- include('partials/_dataTable', { data: lastPlatformCreated }); %> <% } %>
+</div>
 
 <!-- Delete a platform form -->
-<h3>Delete a Platform:</h3>
-<form action="/delete-platform" method="post">
-  <select name="platformId">
-    <% platforms.forEach((item) => { %>
-    <option value="<%= item['Platform ID'] %>"><%= item['Name'] %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Delete</button>
-</form>
-<!-- display the last deleted platform if its given -->
-<% if (typeof lastPlatformDeleted !== 'undefined') { %>
-<p class="info-field">Last Platform Deleted: <%= lastPlatformDeleted %></p>
-<% } %>
+<div class="form-container">
+  <h3>Delete a Platform:</h3>
+  <form action="/delete-platform" method="post">
+    <div>
+      <select name="platformId">
+        <% platforms.forEach((item) => { %>
+        <option value="<%= item['Platform ID'] %>"><%= item['Name'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Delete</button>
+  </form>
+  <!-- display the last deleted platform if its given -->
+  <% if (typeof lastPlatformDeleted !== 'undefined') { %>
+  <p class="info-field">Last Platform Deleted: <%= lastPlatformDeleted %></p>
+  <% } %>
+</div>
 
 <!-- Update platform form -->
-<h3>Update a Platform:</h3>
-<p>Please select a platform and press update to fill in the form</p>
-<form action="/fill-update-form-platform" method="post">
-  <select name="platformId">
-    <% platforms.forEach((item) => { %>
-    <option value="<%= item['Platform ID'] %>"><%= item['Name'] %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Fill Form</button>
-</form>
+<div class="form-container">
+  <h3>Update a Platform:</h3>
+  <p><em>Please select a Platform and press 'Fill Form' to automatically fill in the update form:</em></p>
+  <form action="/fill-update-form-platform" method="post">
+    <div>
+      <select name="platformId">
+        <% platforms.forEach((item) => { %>
+        <option value="<%= item['Platform ID'] %>"><%= item['Name'] %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit">Fill Form</button>
+  </form>
+</div>
 
-<form action="/update-platform" method="post">
-  <label for="platformId">Platform ID<span class="required">*</span>:</label>
-  <input
-    type="text"
-    id="platformId-update"
-    name="platformId"
-    value="<%= updateFormFillData ? updateFormFillData['Platform ID'] : '' %>"
-  />
-  <label for="name">Name<span class="required">*</span>:</label>
-  <input
-    type="text"
-    id="name-update"
-    name="name"
-    value="<%= updateFormFillData ? updateFormFillData['Name'] : '' %>"
-  />
-  <button type="submit">Update</button>
-</form>
-<!-- Display the last platform updated if applicable -->
-<% if (typeof lastPlatformUpdated !== 'undefined') { %>
-<p class="info-field">Last Platform Updated:</p>
-<%- include('partials/_dataTable', { data: lastPlatformUpdated }); %> <% } %>
+<div class="form-container">
+  <form action="/update-platform" method="post">
+    <div>
+      <label for="platformId">Platform ID<span class="required">*</span>:</label>
+      <input
+        type="text"
+        id="platformId-update"
+        name="platformId"
+        value="<%= updateFormFillData ? updateFormFillData['Platform ID'] : '' %>"
+      />
+    </div>
+    <div>
+      <label for="name">Name<span class="required">*</span>:</label>
+      <input
+        type="text"
+        id="name-update"
+        name="name"
+        value="<%= updateFormFillData ? updateFormFillData['Name'] : '' %>"
+      />
+    </div>
+    <button type="submit">Update</button>
+  </form>
+  <!-- Display the last platform updated if applicable -->
+  <% if (typeof lastPlatformUpdated !== 'undefined') { %>
+  <p class="info-field">Last Platform Updated:</p>
+  <%- include('partials/_dataTable', { data: lastPlatformUpdated }); %> <% } %>
+</div>
 <%- include('partials/_footer') %>
